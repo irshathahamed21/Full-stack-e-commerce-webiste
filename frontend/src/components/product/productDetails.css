@@ -1,0 +1,84 @@
+.productDetails {
+    display:flex;
+    background:grey;
+    width:100vw;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding:6vmax;
+
+
+}
+
+.productDetails > div {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2vmax;
+    box-sizing: border-box;
+    border:1px solid white;
+    
+}
+.productDetails > div:last-child {
+    align-items: flex-start;
+}
+.carouselImage {
+    width:20vmax;
+}
+
+.detailsBlock_1 > h2 {
+    color: rgb(54, 54, 54);
+    font: 600 1.6vmax "Roboto";
+  }
+  
+.detailsBlock_1 > p {
+    color: rgba(54, 54, 54, 0.582);
+    font: 200 0.6vmax cursive;
+  }
+  
+.detailsBlock_2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.205);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    width: 70%;
+    padding: 1vmax 0;
+  }
+  
+.detailsBlock_2 span {
+    font: 200 0.8vmax cursive;
+    color: rgba(0, 0, 0, 0.699);
+  }
+  
+.detailsBlock_3 {
+    width: 70%;
+  }
+  
+.detailsBlock_3 > h1 {
+    color: rgba(17, 17, 17, 0.795);
+    font: 400 1.8vmax "Franklin Gothic Medium";
+    margin: 1vmax 0;
+  }
+
+.detailsBlock_3_1 {
+    display: flex;
+    align-items: center;
+  }
+
+.detailsBlock_3_1_1  > button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.616);
+  padding: 0.5vmax;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+
+} 
+
+
+
+
+
+  
