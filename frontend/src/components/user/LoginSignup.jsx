@@ -5,7 +5,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 
-
+import "./loginsignup.css"
 
 
 
@@ -55,8 +55,11 @@ const LoginSignup = ( {history, location}) => {
             const reader = new FileReader()
 
             reader.onload = () => {
-
-            }
+                if (reader.readyState === 2) {
+                  setAvatarPreview(reader.result);
+                  setAvatar(reader.result);
+                }
+              };
 
 
         }
@@ -66,12 +69,20 @@ const LoginSignup = ( {history, location}) => {
     }
 
     const switchTabs = (e,tab) => {
-        if(tab === "login"){
-
-        }
-        if(tab === "register") {
-            
-        }
+        if (tab === "login") {
+            switcherTab.current.classList.add("shiftToNeutral");
+            switcherTab.current.classList.remove("shiftToRight");
+      
+            registerTab.current.classList.remove("shiftToNeutralForm");
+            loginTab.current.classList.remove("shiftToLeft");
+          }
+          if (tab === "register") {
+            switcherTab.current.classList.add("shiftToRight");
+            switcherTab.current.classList.remove("shiftToNeutral");
+      
+            registerTab.current.classList.add("shiftToNeutralForm");
+            loginTab.current.classList.add("shiftToLeft");
+          }
     }
 
     
@@ -84,10 +95,10 @@ const LoginSignup = ( {history, location}) => {
     <div className="LoginSignupBox">
         <div>
             <div className="login_signup_toggle">
-                <p>LOGIN</p>
-                <p>REGISTER</p>
+                <p onClick={(e) => switchTabs(e, "login")} >LOGIN</p>
+                <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
             </div>
-            <button></button>
+            <button ref={switcherTab}></button>
         </div>
         <form className="loginForm"  encType="multipart/form-data" ref = {loginTab} onSubmit = {loginSubmit}>
             <div className="loginEmail">
@@ -97,7 +108,7 @@ const LoginSignup = ( {history, location}) => {
                     placeholder="Email"
                     required
                     value = {loginEmail}
-                    onChange = {() => {setLoginEmail(e.target.value)}}
+                    onChange = {(e) => {setLoginEmail(e.target.value)}}
                 />
             </div>
             <div className="loginPassword">
@@ -107,19 +118,20 @@ const LoginSignup = ( {history, location}) => {
                     placeholder="Password"
                     required
                     value = {loginPassword}
-                    onChange = {() => {setLoginPassword(e.target.value)}}
+                    onChange = {(e) => {setLoginPassword(e.target.value)}}
                   />
             </div>
             <Link to="/password/forgot">Forget Password ?</Link>
             <input type="submit" value="Login" className="loginBtn" />
         </form>
-        <form className = "signupForm" ref = {registerTab} onSubmit = {registerSubmit}>
+        <form className = "signupForm" ref = {registerTab} encType="multipart/form-data" onSubmit = {registerSubmit}>
             <div className="signupName">
                 <FaceIcon/>
                 <input 
                     type="text"
                     placeholder='Name'
                     required
+                    name = "name"
                     value = {name}
                     onChange = {registerDataChange}
                  />
@@ -130,6 +142,7 @@ const LoginSignup = ( {history, location}) => {
                     type = "email" 
                     placeholder="Email"
                     required
+                    name = "email"
                     value = {email}
                     onChange = {registerDataChange}
                 />
@@ -140,12 +153,13 @@ const LoginSignup = ( {history, location}) => {
                     type = "password" 
                     placeholder="Password"
                     required
+                    name = "password"
                     value = {password}
                     onChange = {registerDataChange}
                   />
             </div>
             <div id="registerImage">
-                <img src = {""} alt = "Avatar Preview" />
+                <img src = "https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/public/Profile.png" alt = "Avatar Preview" />
                 <input  
                     type="file" 
                     name='avatar'
@@ -153,7 +167,7 @@ const LoginSignup = ( {history, location}) => {
                     onChange = {registerDataChange}
                  />
             </div>
-            <input type="submit" value="Register" className='signUpBtn' />
+            <input type="submit" value="Register" className='signupBtn' />
         </form>
     </div>
 
