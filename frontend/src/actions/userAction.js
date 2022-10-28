@@ -48,7 +48,7 @@ export const login = (email,password) => async (dispatch) => {
 
         const config = {headers: {"Content-Type":"application/json"}}
 
-        const {data} = await axios.post(``, {email,password}, config)
+        const {data} = await axios.post(`/irshath-e-commerce-store/login`, {email,password}, config)
         
 
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
@@ -64,8 +64,8 @@ export const register = (userData) => async (dispatch) => {
         
         const config = {headers: {"Content-Type":"multipart/form-data"}}
 
-        const {data} = await axios.post(``, userData, config)
-        
+        const {data} = await axios.post(`/irshath-e-commerce-store/register`, userData, config)
+        console.log(data)
 
         dispatch({type:REGISTER_USER_SUCCESS,payload:data.user})
     }
@@ -74,6 +74,35 @@ export const register = (userData) => async (dispatch) => {
 
     }
 }
+
+export const loadUser = () => async(dispatch) => {
+    try {
+        dispatch({type:LOAD_USER_REQUEST})
+
+        const {data} = await axios.get("/irshath-e-commerce-store/me")
+
+        dispatch({type:LOAD_USER_SUCCESS, payload:data})
+
+    }
+    catch(error) {
+        dispatch({type:LOAD_USER_FAIL, payload:error.response.data.message})
+    }
+}
+
+
+export const logout = () => async(dispatch) => {
+    try {
+
+        await axios.get("/irshath-e-commerce-store/logout")
+        dispatch({type:LOGOUT_SUCCESS})
+    }
+    catch(error){
+        dispatch({type:LOGOUT_FAIL, payload:error.response.data.message})
+    }
+}
+
+
+
 
 
 
