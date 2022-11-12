@@ -109,7 +109,7 @@ export const updateProfile = (userData) => async(dispatch)=> {
 
         const config = {headers:{"Content-Type":"multipart/form-data"}}
 
-        const {data} = await axios.put("/irshath-e-commerce-store/update", userData, config)
+        const {data} = await axios.put("/irshath-e-commerce-store/me/update", userData, config)
 
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data.success})
 
@@ -128,8 +128,8 @@ export const updatePassword = (passwords) => async(dispatch)=> {
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const {data} = await axios.put("irshath-e-commerce-store", passwords, config)
-
+        const {data} = await axios.put("/irshath-e-commerce-store/update/password", passwords, config)
+        console.log(data)
         dispatch({type:UPDATE_PASSWORD_SUCCESS,payload:data.success})
 
     }
