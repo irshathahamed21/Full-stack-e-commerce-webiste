@@ -50,6 +50,7 @@ const LoginSignup = ( {history, location}) => {
         myForm.set("email", email)
         myForm.set("password", password)
         myForm.set("avatar", avatar)
+        
         dispatch(register(myForm))
 
     }
@@ -81,6 +82,8 @@ const LoginSignup = ( {history, location}) => {
         }
 
     },[dispatch, error, history, isAuthenticated, redirect])
+    
+    
     const switchTabs = (e,tab) => {
         if (tab === "login") {
             switcherTab.current.classList.add("shiftToNeutral");
