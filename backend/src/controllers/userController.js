@@ -2,13 +2,23 @@
 const { options } = require("../..")
 const User = require("../models/userModel")
 const sendToken = require("../utilities/sendToken")
-
+const cloudinary = require("cloudinary")
 
 // register a user
 
 exports.registerUser = async (req, res, next) => {
 
     try {
+
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder:"avatars",
+            width:150,
+            crop:"scale"
+
+        })
+
+
+
         const { name, email, password } = req.body
 
         const user = await User.create(
@@ -17,12 +27,12 @@ exports.registerUser = async (req, res, next) => {
                 email: email,
                 password: password,
                 avatar: {
-                    public_id: "iiaodks",
-                    url: "to be decided"
+                    public_id: myCloud.public_id,
+                    url: myCloud.secure_url
                 }
             }
         )
-
+        console.log(user)
         sendToken(user, 201, res)
     }
     catch (err) {
@@ -105,7 +115,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     await user.save({ valideBeforeSave: false })
 
-    const resetpasswordUrl = `${req.protocol}://${req.get(
+    const resetPasswordUrl = `${req.protocol}://${req.get(
         "host"
     )}/password/reset/${resetToken}`;
 
@@ -227,22 +237,39 @@ exports.updatePassword = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
 
-    const newUserDetails = {
+    const newUserData = {
         name: req.body.name,
         email: req.body.email
     }
 
-    const user = await User.findByIdAndUpdate(req.user.id, newUserDetails, {
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
-
-    } )
-
-    res.status(200).json({
-        success:true,
-        user
-    })
+    if (req.body.avatar !== "") {
+        const user = await User.findById(req.user.id);
+    
+        const imageId = user.avatar.public_id;
+    
+        await cloudinary.v2.uploader.destroy(imageId);
+    
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+          folder: "avatars",
+          width: 150,
+          crop: "scale",
+        });
+    
+        newUserData.avatar = {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        };
+      }
+    
+      const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      });
+    
+      res.status(200).json({
+        success: true,
+      });
 }
 
 
