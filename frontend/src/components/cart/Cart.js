@@ -1,12 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItemsToCart, removeItemsFromCart } from '../../actions/cartAction'
 import "./cart.css"
 import CartItemCard from './CartItemCard'
+import { Typography } from "@material-ui/core";
+import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import {Link} from "react-router-dom"
 
-
-const Cart = () => {
-    const {cartItems} = useDispatch((state) => state.cart)
+const Cart = ({history}) => {
+    const dispatch = useDispatch()
+    const {cartItems} = useSelector((state) => state.cart)
+    
+    console.log(cartItems)
 
     const increaseQuantity = (id, quantity, stock ) =>{
         const newQty = quantity + 1
@@ -22,12 +27,28 @@ const Cart = () => {
         if(quantity < 0){
             return
         }
+        dispatch(addItemsToCart(id, newQty))
+    }
+
+    const checkoutHandler = () => {
+        history.push("/login?redirect=shopping")
+    }
+
+    const deleteCartItems = (id) => {
         dispatch(removeItemsFromCart(id))
     }
 
 
   return (
-   <>
+    <>
+    {
+        cartItems.length === 0 ? (
+            <div className = "emptyCart">
+                <RemoveShoppingCartIcon />
+                <Typography>No Product in Your Cart</Typography>
+                <Link to="/products">View Products</Link>
+            </div>
+        ): (<>
    <div className="cartPage">
     <div className="cartHeader">
         <p>Product</p>
@@ -37,7 +58,7 @@ const Cart = () => {
     {
         cartItems && cartItems.map((item) => (
             <div className="cartContainer" key = {addItemsToCart.product}>
-                <CartItemCard item = {item}  />
+                <CartItemCard item = {item} deleteCartItems = {deleteCartItems} />
                 <div className="cartInput">
                     <button onClick = {decreaseQuantity(item.product, item.quantity)} >-</button> 
                     <input type = "number" value = {item.quantity} readOnly />
@@ -53,12 +74,22 @@ const Cart = () => {
         <div></div>
         <div className="cartGrossProfitBox">
             <p>Gross Total</p>
+            {/* <p>{`₹${cartItems.reduce(
+                  (acc, item) => acc + item.quantity * item.price,
+                  0
+                )}`}</p>    */}
+        </div>
+        <div></div>
+        <div className="checkOutBtn">
+                <button onClick={checkoutHandler}>Check Out</button>
         </div>
     </div>
 
 
    </div>
-   </>
+   </> )
+            }
+     </>
   )
 }
 
