@@ -1,0 +1,42 @@
+.emptyCart {
+    display:flex;
+    
+}
+.cartPage {
+    padding:5vmax;
+}
+
+.cartHeader {
+    background:tomato;
+    color:white;
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    box-sizing: border-box;
+    font: 300 0.7vmax "Roboto";
+}
+.cartHeader > p {
+    margin:10px;
+}
+
+.cartHeader > p:last-child {
+    text-align: end;
+}
+
+.cartContainer {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;  
+}
+
+.cartInput {
+    display: flex;
+    align-items: center;
+    height: 8vmax;
+}
+
+.cartSubTotal {
+
+}
