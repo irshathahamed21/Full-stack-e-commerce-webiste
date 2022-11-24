@@ -10,8 +10,6 @@ import {Link} from "react-router-dom"
 const Cart = ({history}) => {
     const dispatch = useDispatch()
     const {cartItems} = useSelector((state) => state.cart)
-    
-    console.log(cartItems)
 
     const increaseQuantity = (id, quantity, stock ) =>{
         const newQty = quantity + 1
@@ -31,7 +29,7 @@ const Cart = ({history}) => {
     }
 
     const checkoutHandler = () => {
-        history.push("/login?redirect=shopping")
+        history.push("/login?redirect=shipping")
     }
 
     const deleteCartItems = (id) => {
@@ -57,14 +55,14 @@ const Cart = ({history}) => {
     </div>
     {
         cartItems && cartItems.map((item) => (
-            <div className="cartContainer" key = {addItemsToCart.product}>
+            <div className="cartContainer" key = {item.product}>
                 <CartItemCard item = {item} deleteCartItems = {deleteCartItems} />
                 <div className="cartInput">
-                    <button onClick = {decreaseQuantity(item.product, item.quantity)} >-</button> 
+                    <button onClick = { () => decreaseQuantity(item.product, item.quantity)} >-</button> 
                     <input type = "number" value = {item.quantity} readOnly />
-                    <button onClick = {increaseQuantity(item.product, item.quantity, item.stock)} >-</button>
+                    <button onClick = { () => increaseQuantity(item.product, item.quantity, item.stock)} >+</button>
                 </div>
-                <p className="cartSubTotal">
+                <p className="cartSubtotal">
                     {`₹${item.price * item.quantity}`}
                 </p>
             </div>
@@ -74,10 +72,10 @@ const Cart = ({history}) => {
         <div></div>
         <div className="cartGrossProfitBox">
             <p>Gross Total</p>
-            {/* <p>{`₹${cartItems.reduce(
+            <p>{`₹${cartItems.reduce(
                   (acc, item) => acc + item.quantity * item.price,
                   0
-                )}`}</p>    */}
+                )}`}</p>   
         </div>
         <div></div>
         <div className="checkOutBtn">
