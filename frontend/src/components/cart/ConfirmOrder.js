@@ -3,8 +3,7 @@ import {useSelector} from "react-redux"
 import {Typography} from "@material-ui/core"
 import {Link} from "react-router-dom"
 import {CheckoutSteps} from "./CheckoutSteps"
-
-
+import {history} from "react-router-dom"
 import "./confirmOrder.css"
 
 
@@ -17,13 +16,25 @@ const ConfirmOrder = () => {
     ac + el.quantity * el.price 
   },0)
 
-  const shippingCharges = subtotal >= 1000 ? 0 : subtotal * 0.1
+  const shippingCharges = subtotal >= 1000 ? 0 : 150
 
   const tax = subtotal * 0.18
 
   const totalPrice = subtotal + tax + shippingCharges
 
-  const address = `${shippingInfo.address}, ${}`  
+  const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`  
+
+  const proceedToPayment = () => {
+    const data = {
+      subtotal,
+      shippingCharges,
+      tax,
+      totalPrice
+    }
+    sessionStorage.setItem("orderInfo", JSON.stringify(data))
+
+    history.push("/process/payment")
+  }
 
 
 
