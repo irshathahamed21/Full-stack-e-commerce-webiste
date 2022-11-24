@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { Country, State } from "country-state-city";
 import "./shipping.css"
 import { saveShippingInfo } from '../../actions/cartAction';
+import CheckoutSteps from './CheckoutSteps';
 
 const Shipping = ({history}) => {
     const dispatch = useDispatch()
@@ -26,13 +27,13 @@ const Shipping = ({history}) => {
         return
       }
       dispatch(saveShippingInfo({address, city, state, country, pinCode, phoneNo}))
-
       history.push("/order/confirm")
       
     }
 
   return (
    <>
+   <CheckoutSteps activeStep={0} />
     <div className="shippingContainer">
         <div className="shippingBox">
           <h2 className="shippingHeading">Shipping Details</h2>
