@@ -20,7 +20,9 @@ exports.processPayment = async(req,res) => {
 exports.sendStripeApiKey = async(req,res) => {
     try {
         res.status(200).json({stripeApiKey:process.env.STRIPE_API_KEY})
-    }
+        console.log(process.env.STRIPE_API_KEY)
+
+        }
     catch(error){
         res.status(400).json({success:false, error:error})
 
