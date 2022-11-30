@@ -92,12 +92,44 @@ exports.getAllOrders = async(req,res) => {
 exports.updateOrder = async(req,res) => {
   try {
     const order = await Order.findById(req.params.id)
+    
+    if(!order){
+      res.status(404).json({success:false, message:"Order not found with this Id"})
+    }
+
+    if(order.orderStatus === "Delivered"){
+      res.status(404).json({success:false, message:"You have already delivered this order"})
+
+    }
+
+    if(req.body.status === "Shipped"){
+      order.orderItems.forEach(async(e) => {
+          await updateStock(e.product, e.quantity)
+      })
+    }
+    order.orderStatus = req.body.status
+
+    if(req.body.status === "Delivered"){
+      order.deliveredAt = Date.now()
+    }
+
+    await order.save({validateBeforeSave:false})
+    res.status(200).json({success:true})
   }
   catch(error){
+    res.status(400).json({success:false,message:error.data.message})
 
   }
 }
 
+async function updateStock (id, quantity){
+  const product = await Product.findById(id)
+
+  product.Stock = product.Stock - quantity
+
+  await product.save({validateBeforeSave:false})
+  
+}
 
 
 // delete Order by admin
