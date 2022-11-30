@@ -60,7 +60,6 @@ export const myOrdersReducer = (state = {orders:[]}, action) => {
                 loading:false,
                 orders:action.payload
             }    
-        
         case MY_ORDERS_FAIL:
             return {
                 loading:false,
