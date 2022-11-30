@@ -72,7 +72,7 @@ exports.myOrders = async(req,res) => {
 
 exports.getAllOrders = async(req,res) => {
   try {
-    const allOrders = await Order
+    const allOrders = await Order.find()
 
     let totalAmount = 0;
     allOrders.forEach((item) => {
