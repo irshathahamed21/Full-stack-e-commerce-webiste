@@ -5,10 +5,11 @@ exports.processPayment = async(req,res) => {
         const myPayment = await stripe.paymentIntents.create({
             amount:req.body.amount,
             currency:"inr",
-            metdata:{
+            metadata:{
                 company:"Ecommerce"
-            }
+            },
         }) 
+        console.log(myPayment)
         res.status(200).json({success:true, client_secret:myPayment.client_secret})
 
     }
