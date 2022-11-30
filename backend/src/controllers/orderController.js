@@ -87,6 +87,39 @@ exports.getAllOrders = async(req,res) => {
   }
 }
 
+// update order status by admin
+
+exports.updateOrder = async(req,res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+  }
+  catch(error){
+
+  }
+}
+
+
+
+// delete Order by admin
+
+exports.deleteOrder = async(req,res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+
+    if(!order){
+      res.status(200).json({message:"Order not found with this id"})
+    }
+    await order.remove()
+    res.status(200).json({success:true})
+
+
+  }
+  catch(error){
+    res.status(400).json({success:false,message:error.data.message})
+
+  }
+
+}
 
 
 
