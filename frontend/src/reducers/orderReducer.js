@@ -114,17 +114,20 @@ export const orderReducer = (state = {}, action) => {
             }
         case UPDATE_ORDER_SUCCESS:
             return {
+                ...state,
                 loading:false,
                 isUpdated:action.payload
             }    
         case DELETE_ORDER_SUCCESS:
             return {
+                ...state,
                 loading:false,
                 isDeleted:action.payload
             }    
         case UPDATE_ORDER_FAIL:
         case DELETE_ORDER_FAIL:
             return {
+                ...state,
                 loading:false,
                 error:action.payload
             }
