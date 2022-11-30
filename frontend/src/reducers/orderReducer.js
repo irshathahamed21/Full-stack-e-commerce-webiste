@@ -88,7 +88,6 @@ export const allOrdersReducer = (state = {orders:[]}, action) => {
                 loading:false,
                 orders:action.payload
             }    
-        
         case ALL_ORDERS_FAIL:
             return {
                 loading:false,
@@ -99,7 +98,6 @@ export const allOrdersReducer = (state = {orders:[]}, action) => {
                 ...state,
                 error: null,
             };
-              
         default:
             return state
     }
