@@ -100,7 +100,6 @@ export const deleteReviews = (reviewId, productId) => async(dispatch) => {
 
         const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${reviewId}&productId=${productId}`)
 
-
         dispatch({type:DELETE_REVIEW_SUCCESS, payload:data.success})
     }
     catch(error){
