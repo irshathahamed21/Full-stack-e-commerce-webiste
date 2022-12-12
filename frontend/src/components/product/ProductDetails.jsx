@@ -123,7 +123,7 @@ const ProductDetails = () => {
                 Description : <p>{product.description}</p>
             </div>
 
-            <button  className="submitReview">
+            <button  className="submitReview" onClick = {submitReviewToggle}>
                 Submit Review
             </button>
             
