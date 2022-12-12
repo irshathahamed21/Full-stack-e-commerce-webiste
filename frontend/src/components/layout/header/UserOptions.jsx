@@ -22,6 +22,7 @@ function UserOptions({user}) {
     const options = [
         { icon: <ListAltIcon />, name: "Orders", func: orders },
         { icon: <PersonIcon />, name: "Profile", func: account },
+        { icon:<ShoppingCartIcon/>, name:"Cart", func:cart},
         { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
       ];
 
