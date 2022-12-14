@@ -17,7 +17,9 @@ import {
     DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_SUCCESS,
     DELETE_REVIEW_RESET,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    ADMIN_PRODUCT_REQUEST,
+    ADMIN_PRODUCT_SUCCESS
     
 } from "../constants/productConstants"
 
@@ -44,6 +46,23 @@ export const getProduct = (keyword = "", price = [0, 25000], category, ratings =
     }
     
 }
+
+// get all products for admin
+
+export const getAdminProduct = () => async(dispatch) => {
+    try {
+        dispatch({type:ADMIN_PRODUCT_REQUEST})
+
+        const {data} = await axios.get("/irshath-e-commerce-store/admin/products")
+
+        dispatch({type:ADMIN_PRODUCT_SUCCESS, payload:data})
+
+    } catch (error) {
+        dispatch({type:ADMIN_PRODUCT_FAIL,payload:error.response.data.message})
+        
+    }
+}
+
 
 export const getProductDetails = (id) => async (dispatch) => {
     try {
@@ -83,7 +102,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
 export const getAllReviews = (id) => async (dispatch) => {
     try {
-        dispatch({type:ALL_REVIEWS_REQUEST})
+        dispatch({type:ALL_REVIEW_REQUEST})
 
         const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${id}`)
 
@@ -107,6 +126,8 @@ export const deleteReviews = (reviewId, productId) => async(dispatch) => {
 
     }
 }
+
+// get all products admin
 
 
 export const clearErrors = () => (dispatch) => {
