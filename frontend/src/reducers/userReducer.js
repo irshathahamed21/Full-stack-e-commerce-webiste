@@ -131,3 +131,23 @@ import {
         }
   }
   
+
+  export const allUsersReducer = (state = {users:[]}, action) => {
+        switch(action.type){
+            case ALL_USERS_REQUEST:
+                return {
+                        loading:true
+                }
+            case ALL_USERS_SUCCESS:
+                return {
+                    loading:false,
+                    users:action.payload
+                }
+            case ALL_USERS_FAIL:
+                return  {
+                    loading:false,
+                    error:action.payload
+                }
+
+            }
+  }
