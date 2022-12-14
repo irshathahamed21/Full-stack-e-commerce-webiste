@@ -1,4 +1,4 @@
-import { CLEAR_ERRORS } from "../constants/orderConstants";
+
 import { ALL_PRODUCT_REQUEST,
     ALL_PRODUCT_SUCCESS, 
     ALL_PRODUCT_FAIL, 
@@ -16,7 +16,10 @@ import { ALL_PRODUCT_REQUEST,
     ALL_REVIEW_REQUEST,
     ALL_REVIEW_SUCCESS,
     ALL_REVIEW_FAIL,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    ADMIN_PRODUCT_FAIL,
+    ADMIN_PRODUCT_SUCCESS,
+    ADMIN_PRODUCT_REQUEST
 
 } from "../constants/productConstants";
 
@@ -24,6 +27,7 @@ export const productsReducer = ( state = {products:[]}, action) => {
     
     switch(action.type){
         case ALL_PRODUCT_REQUEST:
+        case ADMIN_PRODUCT_REQUEST:
             return {
                 loading:true,
                 products:[]
@@ -36,11 +40,18 @@ export const productsReducer = ( state = {products:[]}, action) => {
                 resultPerPage: action.payload.resultPerPage,
                 filteredProductsCount: action.payload.filteredProductsCount,
                 }
+        case ADMIN_PRODUCT_SUCCESS:
+            return {
+                loading:false,
+                products:action.payload
+            }
         case ALL_PRODUCT_FAIL:
+        case ADMIN_PRODUCT_FAIL:
             return {
                 loading:false,
                 FAIL:action.payload
-            }            
+            } 
+                       
         default:
             return state
     }
