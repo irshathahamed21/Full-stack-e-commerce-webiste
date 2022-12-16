@@ -36,27 +36,21 @@ exports.registerUser = async (req, res, next) => {
         sendToken(user, 201, res)
     }
     catch (err) {
+        console.log(err.message)
         return res.status(500).json({ "error": err.message })
-
     }
 
-
 }
+
 exports.loginUser = async (req, res, next) => {
     try {
-
-
-
         const { email, password } = req.body;
-
         if (!email || !password) {
             return res.status(400).json({
                 message: "please enter email and password"
             })
         }
-
         const user = await User.findOne({ email }).select("+password")
-
         if (!user) {
             return res.status(401).json({
                 message: "Invalid email Please enter valid email"
@@ -178,9 +172,7 @@ exports.resetPassword = async (req, res, next) => {
 
 // GET  user details
 exports.getUserDetails = async (req, res) => {
-
     try {
-
         const user = await User.findById(req.user.id)
 
         return res.status(200).json({
@@ -340,15 +332,15 @@ exports.deleteUser = async(req,res) => {
             message:"user does not exist"
         })
     }
-
+    await cloudinary.v2.uploader.destroy(user.avatar.public_id)
     await user.remove()
     res.status(200).json({
         success:true,
         message:"user deleted successfully"
-        
     })
-
 }
+
+
 
 
 
