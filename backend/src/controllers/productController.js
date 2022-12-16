@@ -231,9 +231,36 @@ exports.deleteProductReviews = async(req,res) => {
         })
     }
 
+    const reviews = product.reviews.filter((rev)  => 
+        rev._id !== req.query.id
+              
+    )
+    const ratings = 0;
+
+    if(reviews.length === 0){
+        ratings = 0;
+    }
+    else {
+        let totalRatingsSum = 0;
+        reviews.forEach((rat) => totalRatingsSum = totalRatingsSum + rat.ratings )
+        ratings = totalRatingsSum / product.reviews.length
+        }
+
+    const numReviews = reviews.length
+
+    await Product.findByIdAndUpdate(req.query.productId, {
+        reviews,
+        ratings,
+        numReviews
+        }, 
+        {
+        new:true,
+        runValidators:true,
+        useFindAndModify:false
+    })
+
     return res.status(200).json({
         success:true,
-        reviews:product.reviews
     })
 }
 
