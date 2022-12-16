@@ -299,14 +299,81 @@ exports.updateProduct = async(req, res) => {
         if(!product) {
             res.status(404).json({message:"Product not found"})
         }
+
         let images = []
+
+        if(typeof(req.body.images) === "string"){
+            images.push(req.body.images)
+        }
+        else {
+            images = req.body.images;
+        }
+
+        if(images !== undefined){
+            for(let i = 0; i < product.images.length; i++){
+                await cloudinary.v2.uploader.destroy(product.images[i].public_id)
+            }
+            
+        }
+        const imagesLinks = []
+
+        for(let i = 0; i < images.length; i++){
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder:"products"       
+            })
+            imagesLinks.push({
+                public_id:result.public_id,
+                url:result.secure_url
+            })
+        }
+
+        req.body.images = imagesLinks
+
+        product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+            new:true,
+            runValidators:true,
+            useFindAndModify:false
+        })
+
+        res.status(200).json({
+            success:true,
+            product
+        })
+
+        
 
     }
     catch(error){
-
+        res.status(500).json({
+            success:false, message:err.message
+        })
     }
 }
 
+
+// delete product --> admin
+
+exports.deleteProduct = async(req,res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+
+        if(! product){
+        res.status(201).json({message:"product not found with this Id"})
+
+        }
+
+        for(let i = 0; i < product.images.length; i++){
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id)
+        }
+        await product.remove()
+
+
+        res.status(200).json({success:true, message:"Product deleted successfully"})
+    }
+    catch(err){
+        res.status(500).json({success:false, message:err.message})
+    }    
+}
 
 
 
