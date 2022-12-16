@@ -95,8 +95,8 @@ export const createProduct = (productData) => async (dispatch) => {
     try {
         dispatch({type:NEW_PRODUCT_REQUEST})
 
-        const {data} = await axios.create("/irshath-e-commerce-store/")
-
+        const config = {"Content-Type":"apllication/json"}
+        const {data} = await axios.post("/irshath-e-commerce-store/product/new", productData, config )
         dispatch({type:NEW_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
         dispatch({type:NEW_PRODUCT_FAIL})
@@ -104,11 +104,13 @@ export const createProduct = (productData) => async (dispatch) => {
 }
 
 
-export const updateProduct = (productData) => async (dispatch) => {
+export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({type:UPDATE_PRODUCT_REQUEST})
 
-        const {data} = await axios.put("/irshath-e-commerce-store/")
+        const config = {"Content-Type":"apllication/json"}
+
+        const {data} = await axios.put(`/irshath-e-commerce-store/admin/product/${id}`, productData, config)
 
         dispatch({type:UPDATE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
@@ -121,13 +123,14 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({type:DELETE_PRODUCT_REQUEST})
 
-        const {data} = await axios.delete("/irshath-e-commerce-store/")
+        const {data} = await axios.delete(`/irshath-e-commerce-store/admin/product/${id}`)
 
         dispatch({type:DELETE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
         dispatch({type:DELETE_PRODUCT_FAIL})
     }
 }
+
 
 
 
