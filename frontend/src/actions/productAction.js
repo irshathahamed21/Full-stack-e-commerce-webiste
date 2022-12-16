@@ -6,6 +6,15 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
+    NEW_PRODUCT_REQUEST,
+    NEW_PRODUCT_SUCCESS,
+    NEW_PRODUCT_FAIL,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_FAIL,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
     NEW_REVIEW_REQUEST,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
@@ -19,7 +28,8 @@ import {
     DELETE_REVIEW_RESET,
     CLEAR_ERRORS,
     ADMIN_PRODUCT_REQUEST,
-    ADMIN_PRODUCT_SUCCESS
+    ADMIN_PRODUCT_SUCCESS,
+    ADMIN_PRODUCT_FAIL
     
 } from "../constants/productConstants"
 
@@ -54,7 +64,7 @@ export const getAdminProduct = () => async(dispatch) => {
         dispatch({type:ADMIN_PRODUCT_REQUEST})
 
         const {data} = await axios.get("/irshath-e-commerce-store/admin/products")
-
+        console.log(data)
         dispatch({type:ADMIN_PRODUCT_SUCCESS, payload:data})
 
     } catch (error) {
@@ -80,6 +90,47 @@ export const getProductDetails = (id) => async (dispatch) => {
     }
 
 }
+
+export const createProduct = (productData) => async (dispatch) => {
+    try {
+        dispatch({type:NEW_PRODUCT_REQUEST})
+
+        const {data} = await axios.create("/irshath-e-commerce-store/")
+
+        dispatch({type:NEW_PRODUCT_SUCCESS, payload:data})
+    } catch (error) {
+        dispatch({type:NEW_PRODUCT_FAIL})
+    }
+}
+
+
+export const updateProduct = (productData) => async (dispatch) => {
+    try {
+        dispatch({type:UPDATE_PRODUCT_REQUEST})
+
+        const {data} = await axios.put("/irshath-e-commerce-store/")
+
+        dispatch({type:UPDATE_PRODUCT_SUCCESS, payload:data})
+    } catch (error) {
+        dispatch({type:UPDATE_PRODUCT_FAIL})
+    }
+}
+
+
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+        dispatch({type:DELETE_PRODUCT_REQUEST})
+
+        const {data} = await axios.delete("/irshath-e-commerce-store/")
+
+        dispatch({type:DELETE_PRODUCT_SUCCESS, payload:data})
+    } catch (error) {
+        dispatch({type:DELETE_PRODUCT_FAIL})
+    }
+}
+
+
+
 
 export const newReview = (reviewData) => async (dispatch) => {
     try {
@@ -127,7 +178,7 @@ export const deleteReviews = (reviewId, productId) => async(dispatch) => {
     }
 }
 
-// get all products admin
+
 
 
 export const clearErrors = () => (dispatch) => {
