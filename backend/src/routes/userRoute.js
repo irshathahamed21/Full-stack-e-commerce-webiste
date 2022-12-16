@@ -13,15 +13,21 @@ router.route("/logout").get(logout)
 
 router.route("/me").get(isAuthencticatedUser,getUserDetails)
 
-router.route("/update/password").put(isAuthencticatedUser, updatePassword)
+router.route("/update/password")
+      .put(isAuthencticatedUser, updatePassword)
 
-router.route("/me/update").put(isAuthencticatedUser, updateProfile)
+router.route("/me/update")
+        .put(isAuthencticatedUser, updateProfile)
 
-router.route("/admin/users").get(isAuthencticatedUser,authorizeRoles("admin"),getAllUsers)
+router.route("/admin/users")
+        .get(isAuthencticatedUser,authorizeRoles("admin"),getAllUsers)
 
-router.route("/admin/user/:id").get(isAuthencticatedUser,authorizeRoles("admin"),getSingleUser)
-.put(isAuthencticatedUser,authorizeRoles("admin"), updateUserRole)
-.delete(isAuthencticatedUser,authorizeRoles("admin"),deleteUser)
+router
+    .route("/admin/user/:id")
+        .get(isAuthencticatedUser,authorizeRoles("admin"),getSingleUser)
+        .put(isAuthencticatedUser,authorizeRoles("admin"), updateUserRole)
+        .delete(isAuthencticatedUser,authorizeRoles("admin"),deleteUser)
+
 
 
 
