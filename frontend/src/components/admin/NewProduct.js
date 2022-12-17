@@ -7,13 +7,15 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { createProduct } from '../../actions/productAction';
+import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 
 const NewProduct = () => {
     const dispatch = useDispatch()
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
-    const [descriptionm, setDescription] = useState("")
-    const [stock, setStock] = useState("")
+    const [description, setDescription] = useState("")
+    const [Stock, setStock] = useState("")
     const [category, setCategory] = useState("")
     const [images, setImages] = useState([])
     const [imagesPreview, setImagesPreview] = useState([])
@@ -29,13 +31,48 @@ const NewProduct = () => {
         "SmartPhones",
       ];
 
+      useEffect(() => {
+        if (error) {
+          dispatch(clearErrors());
+        }
+    
+        if (success) {
+          alert.success("Product Created Successfully");
+          history.push("/admin/dashboard");
+          dispatch({type:NEW_PRODUCT_RESET})
+        }
+      }, [dispatch, error, history, success]);
+    
+
     const createProductSubmitHandler = (e) => {
         e.preventDefault()
-
+        const myForm = new FormData()
+        myForm.set("name", name)
+        myForm.set("price", price)
+        myForm.set("description", description)
+        myForm.set("category", category)
+        myForm.set("Stock", Stock)
+        images.forEach((image) => {
+            myForm.set("images", image)
+        })
+        dispatch(createProduct(myForm))
     }
 
-    const createProductImageChange = () => {
+    const createProductImageChange = (e) => {
+        const files = Array.from(e.target.files)
+        setImages([])
+        setImagesPreview([])
+        files.forEach((file) => {
+            const reader = new FileReader()
 
+            reader.onload = () => {
+                if(reader.readyState === 2){
+                    setImagesPreview((old) => [...old, reader.result])
+                    setImages((old) => [...old, reader.result])
+                }
+            }
+            reader.readAsDataURL(file)
+        })
     }
     
   return (
@@ -65,15 +102,6 @@ const NewProduct = () => {
                         required
                         value = {price}
                         onChange = {(e) => setPrice(e.target.value)}
-                    />    
-                </div>
-                <div>
-                    <input 
-                        type = "text"
-                        placeholder = "Product Name"
-                        required
-                        value = {name}
-                        onChange = {(e) => setName(e.target.value)}
                     />    
                 </div>
                 <div>
