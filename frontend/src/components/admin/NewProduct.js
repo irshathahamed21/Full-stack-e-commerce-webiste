@@ -7,11 +7,13 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct } from '../../actions/productAction';
+import { createProduct, clearErrors } from '../../actions/productAction';
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
+import "./newProduct.css"
 
-const NewProduct = () => {
+const NewProduct = ({history}) => {
     const dispatch = useDispatch()
+    const {loading, error, success} = useSelector((state) => state.newProduct)
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
@@ -37,7 +39,7 @@ const NewProduct = () => {
         }
     
         if (success) {
-          alert.success("Product Created Successfully");
+        //   alert.success("Product Created Successfully");
           history.push("/admin/dashboard");
           dispatch({type:NEW_PRODUCT_RESET})
         }
@@ -112,7 +114,7 @@ const NewProduct = () => {
                     ></textarea>    
                 </div>
                 <div>
-                  <select onChange = {setCategory(e.target.value)} value = {category}>
+                  <select onChange = {(e)=>setCategory(e.target.value)} value = {category}>
                     {
                         categories.map((ctg) => (
                             <option key = {ctg} value = {ctg}>{ctg}</option>
@@ -125,7 +127,7 @@ const NewProduct = () => {
                         type = "Number"
                         placeholder = "Stock"
                         required
-                        value = {stock}
+                        value = {Stock}
                         onChange = {(e) => setStock(e.target.value)}
                     />    
                 </div>
@@ -141,7 +143,7 @@ const NewProduct = () => {
                 <Button
                         id = "createProductBtn"
                         type = "submit"
-
+                        disabled = {loading ? true:false}
                 >
                     Create
                 </Button>  
