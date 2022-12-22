@@ -3,42 +3,10 @@ const Product = require("../models/productModel")
 const ErrorHandler = require("../utilities/errorHandler")
 // const errorHandler = require("../utilities/errorHandler")
 const catchAsyncError = require("../middleware/catchAsyncError")
+const cloudinary = require("cloudinary")
 
 const ApiFeatures = require("../middleware/apiFeatures")
 
-exports.createProducts = async (req, res, next) => {
-    try {
-        req.body.user = req.user.id
-        const product = await Product.create(req.body)
-        res.status(201).json({
-            success: true,
-            product
-        })
-    }
-    catch (err) {
-        console.log("error", err)
-    }
-
-}
-
-
-// create products --> admin
-
-
-exports.createProducts = async (req, res, next) => {
-    try {
-        req.body.user = req.user.id
-        const product = await Product.create(req.body)
-        res.status(201).json({
-            success: true,
-            product
-        })
-    }
-    catch (err) {
-        console.log("error", err)
-    }
-
-}
 
 
 // get allproducts 
@@ -219,10 +187,10 @@ exports.getAllProductReviews = async(req,res) => {
     })
 }
 
-
+// delete product reviews by admin
 exports.deleteProductReviews = async(req,res) => {
 
-    const product = await Product.findById(req.query.id)
+    const product = await Product.findById(req.query.productId)
 
     if(!product) {
         return res.status(201).json({
@@ -294,14 +262,15 @@ exports.createProduct = async(req,res) => {
         const imagesLinks = []
 
         for(let i = 0; i < images.length; i++){
-            const result = await cloudinary.v2.uploader.upload(images[i], {
+            var result = await cloudinary.v2.uploader.upload(images[i], {
                 folder:"products"
             })
+            imagesLinks.push({
+                public_id:result.public_id,
+                url:result.secure_url
+            })
         }
-        imagesLinks.push({
-            public_id:result.public_id,
-            url:result.secure_url
-        })
+       
         req.body.images = imagesLinks
         req.body.user = req.user.id
 
@@ -310,7 +279,7 @@ exports.createProduct = async(req,res) => {
     }
     catch(error) {
         res.status(500).json({
-            success:false, message:err.message
+            success:false, message:error.message
         })
     }
 } 
@@ -324,7 +293,7 @@ exports.updateProduct = async(req, res) => {
         const product = await Product.findById(req.params.id)
         
         if(!product) {
-            res.status(404).json({message:"Product not found"})
+            res.status(404).json({success:false, message:"Product not found"})
         }
 
         let images = []
@@ -372,7 +341,7 @@ exports.updateProduct = async(req, res) => {
     }
     catch(error){
         res.status(500).json({
-            success:false, message:err.message
+            success:false, message:error.message
         })
     }
 }
