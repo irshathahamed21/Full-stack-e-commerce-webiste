@@ -269,12 +269,19 @@ exports.updateProfile = async (req, res) => {
 
 exports.getAllUsers = async(req,res) => {
 
-    const users = await User.find()
+    
+    try {
+        const users = await User.find()
 
-    res.status(200).json({
+        res.status(200).json({
         success:true,
         users
     })
+    } catch (err) {
+        return res.status(501).json({
+            error: err.message
+        })
+    }
     
 }
 
@@ -282,19 +289,27 @@ exports.getAllUsers = async(req,res) => {
 
 exports.getSingleUser = async(req,res) => {
 
-    const user = await User.findById(req.params.id)
+    try {
+        const user = await User.findById(req.params.id)
 
-    if(!user) {
-        res.status(400).json({
-            message:"user does not exist"
+        if(!user) {
+            res.status(400).json({
+                message:"user does not exist"
+            })
+        }
+    
+    
+        res.status(200).json({
+            success:true,
+            user
         })
     }
-
-
-    res.status(200).json({
-        success:true,
-        user
-    })
+    catch(err){
+        return res.status(500).json({
+            error: err.message
+        })
+    }
+   
     
 }
 
@@ -302,42 +317,58 @@ exports.getSingleUser = async(req,res) => {
 // update role only by the admin
 exports.updateUserRole = async (req, res) => {
 
-    const newUserDetails = {
-        name: req.body.name,
-        email: req.body.email,
-        role:req.body.role
+    try {
+        const newUserDetails = {
+            name: req.body.name,
+            email: req.body.email,
+            role:req.body.role
+        }
+    
+        const user = await User.findByIdAndUpdate(req.params.id, newUserDetails, {
+            new:true,
+            runValidators:true,
+            useFindAndModify:false
+    
+        } )
+    
+        res.status(200).json({
+            success:true,
+            user
+        })
     }
-
-    const user = await User.findByIdAndUpdate(req.params.id, newUserDetails, {
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
-
-    } )
-
-    res.status(200).json({
-        success:true,
-        user
-    })
+    catch(err){
+        return res.status(500).json({
+            error: err.message
+        })
+    }
+   
 }
 
 // delete a user by admin
 
 exports.deleteUser = async(req,res) => {
 
-    const user = await User.findById(req.params.id)
+    try {
+        const user = await User.findById(req.params.id)
 
-    if(!user) {
-        res.status(400).json({
-            message:"user does not exist"
+        if(!user) {
+            res.status(400).json({
+                message:"user does not exist"
+            })
+        }
+        await cloudinary.v2.uploader.destroy(user.avatar.public_id)
+        await user.remove()
+        res.status(200).json({
+            success:true,
+            message:"user deleted successfully"
         })
     }
-    await cloudinary.v2.uploader.destroy(user.avatar.public_id)
-    await user.remove()
-    res.status(200).json({
-        success:true,
-        message:"user deleted successfully"
-    })
+    catch(err){
+        return res.status(500).json({
+            error: err.message
+        })
+    }
+   
 }
 
 
