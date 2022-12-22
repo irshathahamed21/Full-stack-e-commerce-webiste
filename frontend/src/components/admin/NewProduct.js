@@ -13,28 +13,35 @@ import "./newProduct.css"
 
 const NewProduct = ({history}) => {
     const dispatch = useDispatch()
-    const {loading, error, success} = useSelector((state) => state.newProduct)
+    const {loading, error, success, product} = useSelector((state) => state.newProduct)
+    console.log(success)
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
-    const [Stock, setStock] = useState("")
+    const [Stock, setStock] = useState(0)
     const [category, setCategory] = useState("")
+    console.log(category)
     const [images, setImages] = useState([])
     const [imagesPreview, setImagesPreview] = useState([])
     
 
     const categories = [
-        "Laptop",
+        "Kitchen & Home Appliances",
+        "Furniture",
+        "Electronics",
         "Footwear",
-        "Bottom",
-        "Tops",
-        "Attire",
+        "Men's Clothing",
+        "Women's Clothing",
+        "Home essentials",
+        "Snacks",
+        "Chocolates and candies",
         "Camera",
         "SmartPhones",
       ];
 
       useEffect(() => {
         if (error) {
+            console.log(error)
           dispatch(clearErrors());
         }
     
@@ -55,7 +62,7 @@ const NewProduct = ({history}) => {
         myForm.set("category", category)
         myForm.set("Stock", Stock)
         images.forEach((image) => {
-            myForm.set("images", image)
+            myForm.append("images", image)
         })
         dispatch(createProduct(myForm))
     }
@@ -66,9 +73,10 @@ const NewProduct = ({history}) => {
         setImagesPreview([])
         files.forEach((file) => {
             const reader = new FileReader()
-
+            console.log(reader.result)
             reader.onload = () => {
                 if(reader.readyState === 2){
+                    console.log(reader.result)
                     setImagesPreview((old) => [...old, reader.result])
                     setImages((old) => [...old, reader.result])
                 }
@@ -82,6 +90,7 @@ const NewProduct = ({history}) => {
     <div className="dashboard">
         <Sidebar/>
         <div className="newProductContainer">
+
             <form
                 className='createProductForm'
                 encType = "multipart/form-data"
@@ -89,6 +98,7 @@ const NewProduct = ({history}) => {
             >
                 <h1>Create Product</h1>
                 <div>
+                    <SpellcheckIcon />
                     <input 
                         type = "text"
                         placeholder = "Product Name"
@@ -98,6 +108,7 @@ const NewProduct = ({history}) => {
                     />    
                 </div>
                 <div>
+                    <AttachMoneyIcon />
                     <input 
                         type = "number"
                         placeholder = "price"
@@ -107,15 +118,20 @@ const NewProduct = ({history}) => {
                     />    
                 </div>
                 <div>
+                    <DescriptionIcon />
                     <textarea 
                         placeholder = "Product Description"
                         value = {description}
+                        cols = "30"
+                        rows="1"
                         onChange = {(e) => setDescription(e.target.value)}
                     ></textarea>    
                 </div>
                 <div>
-                  <select onChange = {(e)=>setCategory(e.target.value)} value = {category}>
-                    {
+                  <AccountTreeIcon/>  
+                  <select onChange = {(e)=>setCategory(e.target.value)} >
+                            <option value = "">Select Category</option>
+                    {        
                         categories.map((ctg) => (
                             <option key = {ctg} value = {ctg}>{ctg}</option>
                         ))
@@ -123,6 +139,7 @@ const NewProduct = ({history}) => {
                   </select>
                 </div>
                 <div>
+                    <StorageIcon/>
                     <input 
                         type = "Number"
                         placeholder = "Stock"
@@ -131,7 +148,7 @@ const NewProduct = ({history}) => {
                         onChange = {(e) => setStock(e.target.value)}
                     />    
                 </div>
-                <div>
+                <div id = "createProductFormFile">
                     <input 
                         type = "file"
                         name = "avatar"
@@ -140,6 +157,12 @@ const NewProduct = ({history}) => {
                         multiple
                     /> 
                 </div> 
+                <div id="createProductFormImage">
+                    {imagesPreview.map((image, index) => (
+                        <img key={index} src={image} alt="Product Preview" />
+                    ))}
+                </div>
+            
                 <Button
                         id = "createProductBtn"
                         type = "submit"
