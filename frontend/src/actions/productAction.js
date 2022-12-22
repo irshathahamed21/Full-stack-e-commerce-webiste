@@ -95,11 +95,11 @@ export const createProduct = (productData) => async (dispatch) => {
     try {
         dispatch({type:NEW_PRODUCT_REQUEST})
 
-        const config = {"Content-Type":"apllication/json"}
-        const {data} = await axios.post("/irshath-e-commerce-store/product/new", productData, config )
+        const config = {headers:{"Content-Type":"application/json"}}
+        const {data} = await axios.post("/irshath-e-commerce-store/admin/product/new", productData, config )
         dispatch({type:NEW_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
-        dispatch({type:NEW_PRODUCT_FAIL})
+        dispatch({type:NEW_PRODUCT_FAIL, payload:error.response.data.message})
     }
 }
 
@@ -114,7 +114,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
         dispatch({type:UPDATE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
-        dispatch({type:UPDATE_PRODUCT_FAIL})
+        dispatch({type:UPDATE_PRODUCT_FAIL,  payload:error.response.data.message})
     }
 }
 
@@ -127,7 +127,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch({type:DELETE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
-        dispatch({type:DELETE_PRODUCT_FAIL})
+        dispatch({type:DELETE_PRODUCT_FAIL,  payload:error.response.data.message})
     }
 }
 
