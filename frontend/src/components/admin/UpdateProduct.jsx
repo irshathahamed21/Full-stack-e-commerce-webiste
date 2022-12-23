@@ -60,7 +60,7 @@ const UpdateProduct = ({history, match}) => {
             dispatch(clearErrors())
         }
 
-        if(isUpdated){
+        if(isUpdated === true){
             history.push("/admin/products")
             dispatch({type:UPDATE_PRODUCT_RESET})
         }
@@ -81,7 +81,8 @@ const UpdateProduct = ({history, match}) => {
         images.forEach((image) => {
             myForm.append("images", image)
         })
-        dispatch(updateProduct(myForm))
+        // did not put id for update product
+        dispatch(updateProduct(productId, myForm))
     }
 
     const updateProductImageChange = (e) => {
