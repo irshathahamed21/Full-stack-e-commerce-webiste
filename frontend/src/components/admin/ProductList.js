@@ -1,18 +1,17 @@
 import React from 'react'
-import {DataGrid} from "@material-ui/core"
+import {DataGrid} from "@material-ui/data-grid"
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {Button} from "@material-ui/core"
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import SideBar from "./Sidebar";
-import Sidebar from './Sidebar'
+import Sidebar from "./Sidebar";
 import { useEffect } from 'react'
 import { clearErrors, deleteProduct, getAdminProduct } from '../../actions/productAction'
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import "./productlist.css"
 
-
-const OrderList = ({history}) => {
+const ProductList = ({history}) => {
     const dispatch = useDispatch()
     const {error, products} = useSelector((state) => state.products)
     const {error:deleteError, isDeleted} = useSelector((state) => state.product)
@@ -76,7 +75,7 @@ const OrderList = ({history}) => {
     const rows = []
 
     products && 
-    products.forEach(() => {
+    products.forEach((item) => {
         rows.push({
             id:item._id,
             name: item.name,
@@ -107,10 +106,11 @@ const OrderList = ({history}) => {
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">
+            <h1 id="productListHeading">ALL PRODUCTS</h1>
 
             <DataGrid
                 rows = {rows}
-                colums = {columns}
+                columns = {columns}
                 className = "productListTable"
                 pageSize = {10}
                 disableSelectiOnClick
@@ -122,4 +122,4 @@ const OrderList = ({history}) => {
   )
 }
 
-export default OrderList
+export default ProductList
