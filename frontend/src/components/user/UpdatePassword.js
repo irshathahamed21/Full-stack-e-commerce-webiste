@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./updatePassword.css"
 import {useDispatch, useSelector} from "react-redux"
-// import {useAlert} from "react-alert"
+import {useAlert} from "react-alert"
 import { updatePassword } from '../../actions/userAction';
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants';
 import Loader from '../layout/loader/Loader';
@@ -12,7 +12,7 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 const UpdatePassword = ({history}) => {
   const dispatch = useDispatch()
-  // const alert = useAlert()
+  const alert = useAlert()
 
   const {error, isUpdated, loading} = useSelector((state) => state.profile)
 
@@ -36,7 +36,7 @@ const UpdatePassword = ({history}) => {
   
 
     if (isUpdated) {
-      // alert.success("Profile updated Successfully");
+      alert.success("Profile updated Successfully");
       history.push("/account");
       dispatch({
         type: UPDATE_PASSWORD_RESET,
@@ -44,7 +44,7 @@ const UpdatePassword = ({history}) => {
     }
 
 
-  },[error, isUpdated, dispatch, history])
+  },[error, isUpdated, dispatch, history, alert])
 
 
   
