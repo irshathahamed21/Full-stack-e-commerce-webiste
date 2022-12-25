@@ -10,16 +10,18 @@ import { useEffect } from 'react'
 import { clearErrors, deleteProduct, getAdminProduct } from '../../actions/productAction'
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 import "./productlist.css"
+import { useAlert } from "react-alert";
+
 
 const ProductList = ({history}) => {
     const dispatch = useDispatch()
     const {error, products} = useSelector((state) => state.products)
     const {error:deleteError, isDeleted} = useSelector((state) => state.product)
-
     const deleteProductHandler = (id) => {
         dispatch(deleteProduct(id))
 
     }
+    const alert = useAlert()
     const columns = [
         {field:"id", headerName:"Product ID", minWidth:200, flex:0.5},
         {
@@ -87,12 +89,15 @@ const ProductList = ({history}) => {
 
     useEffect(() => {
         if(error){
+            alert.error(error)
             dispatch(clearErrors())
         }
         if(deleteError){
+            alert.error(deleteError)
             dispatch(clearErrors())
         }
         if(isDeleted){
+            alert.success("Product deleted successfully")
             history.push("/admin/products")
             dispatch({type:DELETE_PRODUCT_RESET})
         }
