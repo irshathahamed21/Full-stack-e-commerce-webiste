@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Carousel from "react-material-ui-carousel";
 import {useSelector, useDispatch} from "react-redux"
 import { useParams } from 'react-router-dom';
-import { getProductDetails, newReview } from '../../actions/productAction';
+import { clearErrors, getProductDetails, newReview } from '../../actions/productAction';
 import Loader from '../layout/loader/Loader';
 import { Rating } from "@material-ui/lab";
 import {
@@ -16,6 +16,8 @@ import {
 import "./productDetails.css"
 import ReviewCard from './ReviewCard';
 import { addItemsToCart } from '../../actions/cartAction';
+import { NEW_REVIEW_RESET } from '../../constants/productConstants';
+import {useAlert} from "react-alert"
 
 const ProductDetails = () => {
     const[rating, setRating] = useState(0)
@@ -25,9 +27,9 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const params = useParams()
     const {loading, product, error} = useSelector((state) => state.productDetails)
+    const {success, error:reviewError } = useSelector((state) => state.newReview)
     const  {id} = params
-    console.log(id)
-    console.log(product)
+    const alert = useAlert()
 
     const increaseQuantity = () => {
         if (product.Stock <= quantity) return;
@@ -62,8 +64,20 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
+        if(error){
+            alert.error(error)
+            dispatch(clearErrors())
+        }
+        if(reviewError){
+            alert.error(reviewError)
+            dispatch(clearErrors())
+        }
+        if(success){
+            alert.success("Review submitted successfully")
+            dispatch({type:NEW_REVIEW_RESET})
+        }
         dispatch(getProductDetails(id))
-    },[dispatch, id])
+    },[dispatch, id, error, reviewError, success, alert])
 
     const options = {
         size:"large",
