@@ -12,6 +12,7 @@ import { getAllUsers } from '../../actions/userAction';
 import { getAllOrders } from '../../actions/orderAction';
 
 
+
 const Dashboard = () => {
   Chart.register(LineElement, CategoryScale, ArcElement, LinearScale, PointElement);
 
