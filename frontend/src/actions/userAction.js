@@ -155,7 +155,6 @@ export const forgotPassword = (email) => async (dispatch) => {
     }
 } 
 
-
 export const resetPassword = (token,passwords) => async( dispatch) => {
     try {
         dispatch({type:RESET_PASSWORD_REQUEST})
@@ -183,14 +182,62 @@ export const getAllUsers = () => async(dispatch) => {
 
         const {data} = await axios.get("/irshath-e-commerce-store/admin/users")
 
-        dispatch({type:ALL_USERS_SUCCESS, payload:data})
+        dispatch({type:ALL_USERS_SUCCESS, payload:data.users})
 
     }
     catch(error){
         dispatch({type:ALL_USERS_FAIL, payload:error.response.data.message})
+        console.log(error)
+    }
+}
+
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+        dispatch({type:DELETE_USER_REQUEST})
+
+        const {data} = await axios.delete(`/irshath-e-commerce-store/admin/user/${id}`)
+        
+        dispatch({type:DELETE_USER_SUCCESS, payload:data})
+    }
+    catch(error){
+        dispatch({type:DELETE_USER_FAIL, payload:error.response.data.message})
+    }
+}
+
+export const updateUser = (userData, id) => async(dispatch) => {
+    try {
+        dispatch({type:UPDATE_USER_REQUEST})
+
+        const config = {"Content-Type":"application/json"}
+
+        const {data} = await axios.put(`/irshath-e-commerce-store/admin/user/${id}`, userData, config)
+        console.log(data)
+        dispatch({type:UPDATE_USER_SUCCESS, payload:data})
+    }
+    catch(error){
+        dispatch({type:UPDATE_USER_FAIL, payload:error.response.data.message})
+    }
+}
+
+export const getUserDetails = (id) => async (dispatch) => {
+    try{
+        dispatch({type:USER_DETAILS_REQUEST})
+
+        const {data} = await axios.get(`/irshath-e-commerce-store/admin/user/${id}`)
+        
+        dispatch({type:USER_DETAILS_SUCCESS, payload:data.user})
+    }
+    catch(error){
+        dispatch({type:USER_DETAILS_FAIL, payload:error.response.data.message})
 
     }
 }
+
+export const clearErrors = () => (dispatch) => {
+    dispatch({type:CLEAR_ERRORS})
+}
+
+
 
 
 
