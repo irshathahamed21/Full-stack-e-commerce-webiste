@@ -2,19 +2,18 @@ import React from 'react'
 import {useSelector} from "react-redux"
 import {Typography} from "@material-ui/core"
 import {Link} from "react-router-dom"
-import {CheckoutSteps} from "./CheckoutSteps"
-import {history} from "react-router-dom"
+import CheckoutSteps from "./CheckoutSteps"
 import "./confirmOrder.css"
 
 
-const ConfirmOrder = () => {
+const ConfirmOrder = ({history}) => {
   const {shippingInfo, cartItems} = useSelector((state) => state.cart)
 
   const {user} = useSelector((state) => state.user)
 
-  const subtotal = cartItems.reduce((ac,el) => {
+  const subtotal = cartItems.reduce((ac,el) => 
     ac + el.quantity * el.price 
-  },0)
+  ,0)
 
   const shippingCharges = subtotal >= 1000 ? 0 : 150
 
@@ -39,7 +38,6 @@ const ConfirmOrder = () => {
 
 
 
-  console.log(subtotal)
 
 
   return (
@@ -49,7 +47,7 @@ const ConfirmOrder = () => {
       <div>
         <div className="confirmShippingArea">
           <Typography>Shipping Info</Typography>
-          <div className="confirmshippingAreaBox">
+          <div className="confirmShippingAreaBox">
               <div>
                 <p>Name:</p>
                 <span>{user.name}</span>
