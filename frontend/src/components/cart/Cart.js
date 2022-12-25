@@ -47,12 +47,12 @@ const Cart = ({history}) => {
                 <Link to="/products">View Products</Link>
             </div>
         ): (<>
-   <div className="cartPage">
-    <div className="cartHeader">
-        <p>Product</p>
-        <p>Quantity</p>
-        <p>Subtotal</p>
-    </div>
+        <div className="cartPage">
+        <div className="cartHeader">
+            <p>Product</p>
+            <p>Quantity</p>
+            <p>Subtotal</p>
+        </div>
     {
         cartItems && cartItems.map((item) => (
             <div className="cartContainer" key = {item.product}>
