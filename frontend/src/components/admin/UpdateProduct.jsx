@@ -10,8 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct, clearErrors, getProductDetails } from '../../actions/productAction';
 import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants';
 import "./updateProduct.css"
+import { useAlert } from "react-alert";
+
 
 const UpdateProduct = ({history, match}) => {
+    const alert = useAlert()
     const dispatch = useDispatch()
     const {error, product} = useSelector((state) => state.productDetails)
     const {loading, error: updateError, isUpdated} = useSelector((state) => state.product)
@@ -53,20 +56,23 @@ const UpdateProduct = ({history, match}) => {
         }
 
         if (error) {
+          alert.error(error)  
           dispatch(clearErrors());
         }
 
         if(updateError){
+            alert.error(updateError)
             dispatch(clearErrors())
         }
 
         if(isUpdated === true){
+            alert.success("Product Updated successfully")
             history.push("/admin/products")
             dispatch({type:UPDATE_PRODUCT_RESET})
         }
        
    
-      }, [dispatch, error, history, isUpdated, updateError, productId, product, history]);
+      }, [dispatch, error, history, isUpdated, updateError, productId, product, history, alert]);
     
 
     const updateProductSubmitHandler = (e) => {
