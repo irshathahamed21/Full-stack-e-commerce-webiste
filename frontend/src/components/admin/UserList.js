@@ -9,13 +9,13 @@ import Sidebar from './Sidebar'
 import { useEffect } from 'react'
 import { DELETE_USER_RESET } from '../../constants/userConstants'
 import { deleteUser, getAllUsers, clearErrors } from '../../actions/userAction'
-
+import { useAlert } from 'react-alert'
 
 const UserList = ({history}) => {
     const dispatch = useDispatch()
     const {error, users} = useSelector((state) => state.allUsers)
     const {error:deleteError, isDeleted} = useSelector((state) => state.profile)
-
+    const alert = useAlert()
     const deleteUserHandler = (id) => {
         dispatch(deleteUser(id))
 
@@ -88,18 +88,21 @@ const UserList = ({history}) => {
 
     useEffect(() => {
         if(error){
+            alert.error(error)
             dispatch(clearErrors())
         }
         if(deleteError){
+            alert.error(deleteError)
             dispatch(clearErrors())
         }
         if(isDeleted){
+            alert.success("Product deleted successfully")
             history.push("/admin/users")
             dispatch({type:DELETE_USER_RESET})
         }
         dispatch(getAllUsers())
 
-    },[dispatch, isDeleted, error, deleteError, history])
+    },[dispatch, isDeleted, error, deleteError, history, alert])
 
     
   return (
