@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createProduct, clearErrors } from '../../actions/productAction';
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 import "./newProduct.css"
+import { useAlert } from "react-alert";
+
 
 const NewProduct = ({history}) => {
     const dispatch = useDispatch()
@@ -23,6 +25,7 @@ const NewProduct = ({history}) => {
     console.log(category)
     const [images, setImages] = useState([])
     const [imagesPreview, setImagesPreview] = useState([])
+    const alert = useAlert()
     
 
     const categories = [
@@ -41,12 +44,12 @@ const NewProduct = ({history}) => {
 
       useEffect(() => {
         if (error) {
-            console.log(error)
-          dispatch(clearErrors());
+        alert.error(error)
+        dispatch(clearErrors());
         }
     
         if (success) {
-        //   alert.success("Product Created Successfully");
+          alert.success("Product Created Successfully");
           history.push("/admin/dashboard");
           dispatch({type:NEW_PRODUCT_RESET})
         }
