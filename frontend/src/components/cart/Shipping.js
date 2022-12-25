@@ -10,6 +10,7 @@ import { Country, State } from "country-state-city";
 import "./shipping.css"
 import { saveShippingInfo } from '../../actions/cartAction';
 import CheckoutSteps from './CheckoutSteps';
+import { useAlert } from 'react-alert';
 
 const Shipping = ({history}) => {
     const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const Shipping = ({history}) => {
     const shippingSubmit = (e) => {
       e.preventDefault()
       if(phoneNo.length < 10 || phoneNo.length > 10){
+        alert.show("Phone number should be atleast 10 digits")
         return
       }
       dispatch(saveShippingInfo({address, city, state, country, pinCode, phoneNo}))
