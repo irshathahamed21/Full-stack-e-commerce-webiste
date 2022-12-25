@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./updateProfile.css"
 import {useDispatch, useSelector} from "react-redux"
-// import {useAlert} from "react-alert"
+import {useAlert} from "react-alert"
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
 import { loadUser, updateProfile } from '../../actions/userAction';
@@ -11,7 +11,7 @@ import Loader from '../layout/loader/Loader';
 
 const UpdateProfile = ({history}) => {
   const dispatch = useDispatch()
-  // const alert = useAlert()
+  const alert = useAlert()
 
   const {user} = useSelector((state) => state.user)
   const {error, isUpdated, loading} = useSelector((state) => state.profile)
@@ -53,7 +53,7 @@ const UpdateProfile = ({history}) => {
     }
 
    if(isUpdated){
-    // alert.success("Profile Updated Successfully");
+    alert.success("Profile Updated Successfully");
     dispatch(loadUser());
 
     history.push("/account");
@@ -63,7 +63,7 @@ const UpdateProfile = ({history}) => {
    }
 
 
-  },[user,isUpdated, dispatch, history])
+  },[user,isUpdated, dispatch, history, alert])
 
 
   
