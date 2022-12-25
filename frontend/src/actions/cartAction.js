@@ -1,10 +1,12 @@
 import { ADD_TO_CART, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO} from "../constants/cartConstants";
 
 import axios from "axios"
+
 export const addItemsToCart = (id,quantity) => async(dispatch, getState) => {
    
     const {data} = await axios.get(`/irshath-e-commerce-store/product/${id}`)
 
+    console.log(data)
     dispatch({
         type:ADD_TO_CART,
         payload:{
@@ -17,7 +19,7 @@ export const addItemsToCart = (id,quantity) => async(dispatch, getState) => {
         }
     })
 
-    localStorage.setItem("cartItem", JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 
 }
 
@@ -35,7 +37,7 @@ export const saveShippingInfo = (data) => async(dispatch) => {
         type:SAVE_SHIPPING_INFO,
         payload:data
     })
-    localStorage.setItem("shoppingInfo", JSON.stringify(data))
+    localStorage.setItem("shippingInfo", JSON.stringify(data))
 }
 
 
