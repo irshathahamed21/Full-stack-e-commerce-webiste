@@ -108,10 +108,10 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({type:UPDATE_PRODUCT_REQUEST})
 
-        const config = {"Content-Type":"apllication/json"}
+        const config = {headers:{"Content-Type":"application/json"}}
 
         const {data} = await axios.put(`/irshath-e-commerce-store/admin/product/${id}`, productData, config)
-
+            console.log(data)
         dispatch({type:UPDATE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
         dispatch({type:UPDATE_PRODUCT_FAIL,  payload:error.response.data.message})
