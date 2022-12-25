@@ -82,13 +82,12 @@ export const allOrdersReducer = (state = {orders:[]}, action) => {
     switch (action.type) {
         case ALL_ORDERS_REQUEST:
             return {
-                ...state,
                 loading:true
             }
         case ALL_ORDERS_SUCCESS:
             return {
                 loading:false,
-                orders:action.payload
+                orders:action.payload.orders
             }    
         case ALL_ORDERS_FAIL:
             return {
