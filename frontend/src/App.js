@@ -101,13 +101,7 @@ function App() {
       <ProtectedRoute exact path = "/admin/order/:id" isAdmin = {true} component = {ProcessOrder}/>
       <ProtectedRoute exact path = "/admin/users" isAdmin = {true} component = {UserList}/>
       <ProtectedRoute exact path = "/admin/user/:id" isAdmin = {true} component = {UpdateUser}/>
-      <ProtectedRoute exact path = "/admin/user/:id" isAdmin = {true} component = {UpdateUser}/>
       <ProtectedRoute exact path = "/admin/produt/reviews" isAdmin = {true} component = {ProductReviews}/>
-      
-     
-      
-  
-
       </Switch>
       <Footer/>
       // 07:10 -08:05
