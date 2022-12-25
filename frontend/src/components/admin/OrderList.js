@@ -1,23 +1,26 @@
 import React from 'react'
-import {DataGrid} from "@material-ui/core"
+import {DataGrid} from "@material-ui/data-grid"
+import Sidebar from "./Sidebar"
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {Button} from "@material-ui/core"
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import SideBar from "./Sidebar";
-import Sidebar from './Sidebar'
 import { deleteOrder, getAllOrders } from '../../actions/orderAction'
 import { useEffect } from 'react'
 import { clearErrors } from '../../actions/productAction'
 import { DELETE_ORDER_RESET } from '../../constants/orderConstants'
+import "./productlist.css"
+import { useAlert } from "react-alert";
+
+
 
 
 const OrderList = ({history}) => {
     const dispatch = useDispatch()
     const {error, orders} = useSelector((state) => state.allOrders)
     const {error:deleteError, isDeleted} = useSelector((state) => state.order)
-
+    const alert = useAlert()
     const deleteOrderHandler = (id) => {
         dispatch(deleteOrder(id))
 
@@ -30,7 +33,7 @@ const OrderList = ({history}) => {
             minWidth:150,
             flex:0.5,
             cellClassName:(params) => {
-                return params.getValue(parm.id, "status") === "Delivered" ? "greenColor" :"redColor"
+                return params.getValue(params.id, "status") === "Delivered" ? "greenColor" :"redColor"
             }
 
         },
@@ -81,7 +84,7 @@ const OrderList = ({history}) => {
     const rows = []
 
     orders && 
-    orders.forEach(() => {
+    orders.forEach((item) => {
         rows.push({
             id:item._id,
             itemsQty: item.orderItems.length,
@@ -92,18 +95,21 @@ const OrderList = ({history}) => {
 
     useEffect(() => {
         if(error){
+            alert.error(error)
             dispatch(clearErrors())
         }
         if(deleteError){
+            alert.error(deleteError)
             dispatch(clearErrors())
         }
         if(isDeleted){
+            alert.success("Order deleted successfully")
             history.push("/admin/orders")
             dispatch({type:DELETE_ORDER_RESET})
         }
         dispatch(getAllOrders())
 
-    },[dispatch, isDeleted, error, deleteError, history])
+    },[dispatch, isDeleted, error, deleteError, history, alert])
 
     
   return (
@@ -111,10 +117,10 @@ const OrderList = ({history}) => {
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">
-
+          <h1 id="productListHeading">ALL ORDERS</h1>
             <DataGrid
                 rows = {rows}
-                colums = {columns}
+                columns = {columns}
                 className = "productListTable"
                 pageSize = {10}
                 disableSelectiOnClick
