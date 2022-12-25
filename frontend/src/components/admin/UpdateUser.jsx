@@ -17,7 +17,7 @@ import "./updateProduct.css"
 
 const UpdateUser = ({ history, match }) => {
   const dispatch = useDispatch();
- 
+  const alert = useAlert()
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
@@ -42,21 +42,21 @@ const UpdateUser = ({ history, match }) => {
       setRole(user.role);
     }
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
     
     if (updateError) {
-      // alert.error(updateError);
+      alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("User Updated Successfully");
+      alert.success("User Updated Successfully");
       history.push("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }
-  }, [dispatch, error, history, isUpdated, updateError, user, userId]);
+  }, [dispatch, error, history, isUpdated, updateError, user, userId, alert]);
 
   const updateUserSubmitHandler = (e) => {
     e.preventDefault();
