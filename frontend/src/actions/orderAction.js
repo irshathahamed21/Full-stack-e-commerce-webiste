@@ -65,14 +65,14 @@ export const getOrderDetails = (id) => async(dispatch) => {
     }
 }
 
-
-export const allOrders = () => async(dispatch) => {
+// get all orders for admin 
+export const getAllOrders = () => async(dispatch) => {
     try {
         dispatch({type:ALL_ORDERS_REQUEST})
 
         const {data} = await axios.get("/irshath-e-commerce-store/admin/orders")
-        
-        dispatch({type:ALL_ORDERS_SUCCESS, payload:data.orders})
+        console.log(data.orders)
+        dispatch({type:ALL_ORDERS_SUCCESS, payload:data})
     }
     catch(error){
         dispatch({type:ALL_ORDERS_FAIL, payload:error.response.data.message})
@@ -110,14 +110,6 @@ export const deleteOrder = (id) => async(dispatch) => {
     }
 }
 
-export const getAllReviews = () => async (dispatch) => {
-    try {
-        dispatch({type})
-    }
-    catch(error){
-
-    }
-}
 
 
 export const clearErrors = () => (dispatch) => {
