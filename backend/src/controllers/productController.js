@@ -1,8 +1,8 @@
-const { router } = require("../..")
+
 const Product = require("../models/productModel")
-const ErrorHandler = require("../utilities/errorHandler")
+const errorHandler = require("../utilities/errorHandler")
 // const errorHandler = require("../utilities/errorHandler")
-const catchAsyncError = require("../middleware/catchAsyncError")
+const catchAsyncerror = require("../middleware/catchAsyncerror")
 const cloudinary = require("cloudinary")
 
 const ApiFeatures = require("../middleware/apiFeatures")
@@ -38,8 +38,8 @@ exports.getAllProducts = async (req, res, next) => {
             filteredProductsCount,
         });
     }
-    catch (err) {
-        return res.status(500).json({ "error": err.message })
+    catch (error) {
+        return res.status(500).json({ success:false,  message:error.message})
     }
 
 }
@@ -52,7 +52,7 @@ exports.getProductDetails = async (req, res) => {
 
     try {
         if (!product) {
-            // return next(new ErrorHandler("Product not found", 404) )
+            // return next(new errorHandler("Product not found", 404) )
             res.status(202).json({ message: "product not found" })
         }
 
@@ -61,8 +61,8 @@ exports.getProductDetails = async (req, res) => {
             product
         })
     }
-    catch (err) {
-        return res.status(500).json({ "error": err.message })
+    catch (error) {
+        return res.status(500).json({success:false,  message:error.message })
     }
 
 }
@@ -116,8 +116,8 @@ exports.createProductReview = async (req, res, next) => {
       success: true,
     });
   }
-  catch(err){
-    return res.status(500).json({ "error": err.message })
+  catch(error){
+    return res.status(500).json({ success:false,  message:error.message })
   }
 }
 
@@ -143,7 +143,7 @@ exports.getAllProductReviews = async(req,res) => {
     })
     }
     catch(error){
-        return res.status(500).json({ "error": err.message })
+        return res.status(500).json({ success:false,  message:error.message })
     }
 
 }
@@ -196,8 +196,8 @@ exports.deleteProductReviews = async(req,res) => {
         success:true,
     })
 }
-    catch(err){
-        return res.status(500).json({ "error": err.message })
+    catch(error){
+        return res.status(500).json({ success:false, message:error.message})
     }
 }
 
@@ -208,9 +208,9 @@ exports.getAdminProducts = async(req,res) => {
         const products = await Product.find()
         res.status(200).json({success:true, products })
     }
-    catch(err){
+    catch(error){
         res.status(500).json({
-            success:false, message:err.message
+            success:false, message:error.message
         })
     }
 }
@@ -262,9 +262,10 @@ exports.updateProduct = async(req, res) => {
         let product = await Product.findById(req.params.id);
 
         if (!product) {
-          return next(new ErrorHander("Product not found", 404));
+            res.status(500).json({
+                success:false, message:"Product not found with this Id"
+            })
         }
-      
         // Images Start Here
         let images = [];
       
@@ -335,8 +336,8 @@ exports.deleteProduct = async(req,res) => {
 
         res.status(200).json({success:true, message:"Product deleted successfully"})
     }
-    catch(err){
-        res.status(500).json({success:false, message:err.message})
+    catch(error){
+        res.status(500).json({success:false, message:error.message})
     }    
 }
 

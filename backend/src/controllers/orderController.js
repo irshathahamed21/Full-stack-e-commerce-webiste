@@ -3,6 +3,7 @@ const Product = require("../models/productModel")
 
 // create new order
 exports.newOrder = async(req,res) => {
+  try {
     const {
         shippingInfo,
         orderItems,
@@ -29,13 +30,18 @@ exports.newOrder = async(req,res) => {
         success: true,
         order,
       });
+    }
+    catch(error){
+    res.status(400).json({success:false,message:error.message})
+
+    }
 }
 
 // get Single Order
 exports.getSingleOrder = async (req, res) => {
   
   try {
-    const order = await Order.findById(req.params.id).populate("user", "name email")
+    const order = await Order.findById(req.params.id)
   
     if(!order){
       res.status(404).json({success:false, message:"Order not found with this Id"})
@@ -47,7 +53,7 @@ exports.getSingleOrder = async (req, res) => {
     })
   }
   catch(error){
-    res.status(400).json({success:false,message:error.data.message})
+    res.status(400).json({success:false,message:error.message})
   }
   
 
@@ -58,12 +64,12 @@ exports.getSingleOrder = async (req, res) => {
 exports.myOrders = async(req,res) => {
   try{
     const orders = await Order.find({user:req.user._id})
-    res.status(200).json({success:true,orders})
+    res.status(200).json({success:true, orders})
 
     
   }
   catch(error){
-    res.status(400).json({success:false,message:error.data.message})
+    res.status(400).json({success:false,message:error.message})
 
   }
 }
@@ -72,17 +78,17 @@ exports.myOrders = async(req,res) => {
 
 exports.getAllOrders = async(req,res) => {
   try {
-    const allOrders = await Order.find()
+    const orders = await Order.find()
 
     let totalAmount = 0;
-    allOrders.forEach((item) => {
+    orders.forEach((item) => {
       totalAmount = totalAmount + item.totalPrice
     })
 
-    res.status(200).json({success:true, allOrders})
+    res.status(200).json({success:true, totalAmount, orders})
   }
   catch(error){
-    res.status(400).json({success:false,message:error.data.message})
+    res.status(400).json({success:false,message:error.message})
 
   }
 }
@@ -117,7 +123,7 @@ exports.updateOrder = async(req,res) => {
     res.status(200).json({success:true})
   }
   catch(error){
-    res.status(400).json({success:false,message:error.data.message})
+    res.status(400).json({success:false,message:error.message})
 
   }
 }
@@ -147,7 +153,7 @@ exports.deleteOrder = async(req,res) => {
 
   }
   catch(error){
-    res.status(400).json({success:false,message:error.data.message})
+    res.status(400).json({success:false,message:error.message})
 
   }
 

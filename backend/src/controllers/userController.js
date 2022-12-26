@@ -35,9 +35,9 @@ exports.registerUser = async (req, res, next) => {
         console.log(user)
         sendToken(user, 201, res)
     }
-    catch (err) {
-        console.log(err.message)
-        return res.status(500).json({ "error": err.message })
+    catch (error) {
+        console.log(error.message)
+        return res.status(500).json({ success:false, error: error.message })
     }
 
 }
@@ -70,8 +70,8 @@ exports.loginUser = async (req, res, next) => {
 
         sendToken(user, 200, res)
     }
-    catch (err) {
-        return res.status(500).json({ "error": err.message })
+    catch (error) {
+        return res.status(500).json({ success:false, success:false,  message:error.message })
     }
 
 }
@@ -134,7 +134,7 @@ exports.forgotPassword = async (req, res, next) => {
         await user.save({ validateBeforeSave: false });
 
         return res.status(500).json({
-            error: error.message
+            success:false,  message:error.message
         })
     }
 }
@@ -180,9 +180,9 @@ exports.getUserDetails = async (req, res) => {
             user
         })
     }
-    catch (err) {
+    catch (error) {
         return res.status(501).json({
-            error: err.message
+            success:false,  message:error.message
         })
     }
 }
@@ -218,9 +218,9 @@ exports.updatePassword = async (req, res) => {
 
         sendToken(user, 200, res)
     }
-    catch (err) {
+    catch (error) {
         return res.status(501).json({
-            error: err.message
+            success:false,  message:error.message
         })
     }
 
@@ -228,7 +228,7 @@ exports.updatePassword = async (req, res) => {
 
 
 exports.updateProfile = async (req, res) => {
-
+    try {
     const newUserData = {
         name: req.body.name,
         email: req.body.email
@@ -262,6 +262,12 @@ exports.updateProfile = async (req, res) => {
       res.status(200).json({
         success: true,
       });
+    }
+    catch(error){
+        res.status(200).json({
+            success: false, message:error.message
+        });
+    }
 }
 
 
@@ -277,9 +283,9 @@ exports.getAllUsers = async(req,res) => {
         success:true,
         users
     })
-    } catch (err) {
+    } catch (error) {
         return res.status(501).json({
-            error: err.message
+            success: false, message:error.message
         })
     }
     
@@ -304,15 +310,14 @@ exports.getSingleUser = async(req,res) => {
             user
         })
     }
-    catch(err){
+    catch(error){
         return res.status(500).json({
-            error: err.message
+            success: false, message:error.message
         })
     }
    
     
 }
-
 // update profile by admin 
 // update role only by the admin
 exports.updateUserRole = async (req, res) => {
@@ -336,9 +341,9 @@ exports.updateUserRole = async (req, res) => {
             user
         })
     }
-    catch(err){
+    catch(error){
         return res.status(500).json({
-            error: err.message
+            success: false, message:error.message
         })
     }
    
@@ -363,9 +368,9 @@ exports.deleteUser = async(req,res) => {
             message:"user deleted successfully"
         })
     }
-    catch(err){
+    catch(error){
         return res.status(500).json({
-            error: err.message
+            success: false, message:error.message
         })
     }
    
