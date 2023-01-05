@@ -1,4 +1,4 @@
-import {useEffect,useState} from "react"
+import {useState} from "react"
 import "./header.css"
 import {SpeedDial, SpeedDialAction} from "@material-ui/lab"
 import Backdrop from "@material-ui/core/Backdrop";
@@ -9,14 +9,12 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import {useHistory} from "react-router-dom";
 import { logout } from "../../../actions/userAction";
-import {useAlert} from "react-alert"
 import { useDispatch } from "react-redux";
 
 
 
 function UserOptions({user}) {
     const dispatch = useDispatch()
-    // const alert = useAlert()
     const history = useHistory()
     const[open, setOpen] = useState(false)
     const options = [
@@ -26,7 +24,7 @@ function UserOptions({user}) {
         { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
       ];
 
-      if (user.role === "admin") {
+      if (user && user.role === "admin") {
         options.unshift({
           icon: <DashboardIcon />,
           name: "Dashboard",
@@ -65,7 +63,7 @@ function UserOptions({user}) {
                 ariaLabel="SpeedDial tooltip example"
                 onOpen={() => {setOpen(true)}}
                 onClose = {() => {setOpen(false)}}
-                style = {{zIndex:"11"}}
+                style = {{ position: 'absolute', top:"8px"}}
                 open = {open}
                 direction = "down"
                 className="speedDial"
@@ -76,8 +74,6 @@ function UserOptions({user}) {
                       alt="Profile"
                     />
                   }
-               
-
         >
             {
                 options.map((item) => (
