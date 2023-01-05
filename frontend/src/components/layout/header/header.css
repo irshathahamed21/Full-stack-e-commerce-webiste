@@ -1,12 +1,6 @@
-.speedDial {
-    position:fixed;
-   
-    right:3vmax;
-    top:3vmax;
-}
 
 .speedDialIcon {
-    width:56px;
-    height:56px;
+    width:36px;
+    height:36px;
     border-radius: 100%;
 }
