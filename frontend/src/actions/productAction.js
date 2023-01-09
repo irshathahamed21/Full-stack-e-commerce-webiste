@@ -18,14 +18,12 @@ import {
     NEW_REVIEW_REQUEST,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
-    NEW_REVIEW_RESET,
     ALL_REVIEW_REQUEST,
     ALL_REVIEW_SUCCESS,
     ALL_REVIEW_FAIL,
     DELETE_REVIEW_FAIL,
     DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_RESET,
     CLEAR_ERRORS,
     ADMIN_PRODUCT_REQUEST,
     ADMIN_PRODUCT_SUCCESS,
@@ -33,29 +31,32 @@ import {
     
 } from "../constants/productConstants"
 
-export const getProduct = (keyword = "", price = [0, 25000], category, ratings = 0,page) => async (dispatch) => {
+
+export const getProduct =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
     try {
-        dispatch({type:ALL_PRODUCT_REQUEST})
+      dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        let link = `/irshath-e-commerce-store/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&page=${page}`
+      let link = `/irshath-e-commerce-store/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-        if(category){
-            link = `/irshath-e-commerce-store/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&category=${category}&page=${page}`
-        
-        }
+      if (category) {
+        link = `/irshath-e-commerce-store/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
 
-        const {data} = await axios.get(link)
-        console.log(data)
-        
-        dispatch({type:ALL_PRODUCT_SUCCESS,payload:data})
+      const { data } = await axios.get(link);
 
-        
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
     }
-    catch(error) {
-        dispatch({type:ALL_PRODUCT_FAIL,payload:error.response.data.message})
-    }
-    
-}
+  };
 
 // get all products for admin
 
@@ -142,7 +143,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         const config = {headers: {
             "Content-Type":"application/json"
         }}
-        const {data} = await axios.put("/irshath-e-commerce-store/review", reviewData, config)
+        const {data} = await axios.put("/irshath-e-commerce-store/review/create", reviewData, config)
         
         dispatch({type:NEW_REVIEW_SUCCESS, payload:data.success})
 
@@ -159,7 +160,7 @@ export const getAllReviews = (id) => async (dispatch) => {
         dispatch({type:ALL_REVIEW_REQUEST})
 
         const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${id}`)
-
+        console.log(data)
         dispatch({type:ALL_REVIEW_SUCCESS, payload:data.reviews})
     }   
     catch(error) {
@@ -171,8 +172,8 @@ export const deleteReviews = (reviewId, productId) => async(dispatch) => {
     try {
         dispatch({type:DELETE_REVIEW_REQUEST})
 
-        const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${reviewId}&productId=${productId}`)
-
+        const {data} = await axios.delete(`/irshath-e-commerce-store/reviews?id=${reviewId}&productId=${productId}`)
+        console.log(data)
         dispatch({type:DELETE_REVIEW_SUCCESS, payload:data.success})
     }
     catch(error){
