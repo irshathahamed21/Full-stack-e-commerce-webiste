@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
         required: [true, "Please enter product cateogory"]
 
     },
-    stock: {
+    Stock: {
         type: Number,
         required: [true, "Please enter product stock"],
         maxlength: [4, "Stock length can exceed morethan 4 characters"],
@@ -53,7 +53,7 @@ const productSchema = new mongoose.Schema({
         {
             user: {
                 type: mongoose.Schema.ObjectId,
-                ref:"user",
+                ref:"User",
                 required: true
         
             },
@@ -73,7 +73,7 @@ const productSchema = new mongoose.Schema({
     ],
     user: {
         type: mongoose.Schema.ObjectId,
-        ref:"user",
+        ref:"User",
         required: true
 
     },
