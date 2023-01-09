@@ -23,12 +23,10 @@ exports.getAllProducts = async (req, res, next) => {
         let products = await apiFeature.query.clone()
 
         let filteredProductsCount = products.length;
-
+// 
         apiFeature.pagination(resultPerPage);
 
         products = await apiFeature.query.clone();
-
-
 
         res.status(200).json({
             success: true,
@@ -150,11 +148,7 @@ exports.getAllProductReviews = async(req,res) => {
 
 // delete product reviews by admin
 exports.deleteProductReviews = async(req,res) => {
-
     try {
-
-    
-
     const product = await Product.findById(req.query.productId)
 
     if(!product) {
@@ -164,11 +158,11 @@ exports.deleteProductReviews = async(req,res) => {
         })
     }
 
-    const reviews = product.reviews.filter((rev)  => 
-        rev._id !== req.query.id
-              
+    console.log(req.query.id, req.query.productId)
+    
+    const reviews = product.reviews.filter((rev)  => rev._id.toString() !== req.query.id.toString()            
     )
-    const ratings = 0;
+    let ratings = 0;
 
     if(reviews.length === 0){
         ratings = 0;
