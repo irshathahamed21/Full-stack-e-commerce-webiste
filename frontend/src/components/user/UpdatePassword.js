@@ -51,6 +51,8 @@ const UpdatePassword = ({history}) => {
 
   return (
     <>
+    <metadata title = "Update Password" />
+
     {
       loading ? <Loader/> :
       <>

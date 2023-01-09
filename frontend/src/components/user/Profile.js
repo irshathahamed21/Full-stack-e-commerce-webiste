@@ -20,6 +20,8 @@ function Profile({history}) {
 
     return  (
        <>
+        <metadata title = "User's Profile" />
+
        {    loading ? (<Loader/> ): (   <>
             <div className="profileContainer">
                 <div>

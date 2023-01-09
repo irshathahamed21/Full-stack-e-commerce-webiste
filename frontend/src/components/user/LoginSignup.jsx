@@ -117,6 +117,7 @@ const LoginSignup = ( {history, location}) => {
     
   return (
     <>
+    <metadata title = "User Register" />
     {loading ? (<Loader/> ) : (
         <>
         <div className="LoginSignupContainer">

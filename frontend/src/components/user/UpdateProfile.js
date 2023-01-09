@@ -70,6 +70,7 @@ const UpdateProfile = ({history}) => {
 
   return (
     <>
+    <metadata title = "Update Profile" />
     {
       loading ? <Loader/> :
       <>
