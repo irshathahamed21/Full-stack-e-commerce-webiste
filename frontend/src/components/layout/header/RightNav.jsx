@@ -11,7 +11,6 @@ const Ul = styled.ul`
   flex-flow:row nowrap;
   justify-content: space-evenly;
   align-items:center;
-  border:2px solid black;
  
   li {
     padding: 8px 10px;
