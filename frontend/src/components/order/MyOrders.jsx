@@ -81,10 +81,13 @@ const MyOrders = () => {
     
     return (
    <>
+    <metadata title = "My Orders" />
+
    {
     loading ? (<Loader/>) :
     (
       <>
+
       <div className="myOrdersPage">
         <DataGrid
           rows = {rows}

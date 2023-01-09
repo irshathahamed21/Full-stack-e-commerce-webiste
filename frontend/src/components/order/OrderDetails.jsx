@@ -24,6 +24,8 @@ const OrderDetails = ({ match }) => {
   }, [dispatch, error, match.params.id, alert]);
   return (
     <Fragment>
+    <metadata title = "Order Details" />
+
       {loading ? (
         <Loader />
       ) : (
