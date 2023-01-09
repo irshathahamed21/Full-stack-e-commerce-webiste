@@ -55,6 +55,8 @@ const ProcessOrder = ({ history, match }) => {
 
   return (
     <Fragment>
+    <metadata title = "Process Order" />
+
       <div className="dashboard">
         <Sidebar />
         <div className="newProductContainer">

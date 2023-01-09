@@ -114,6 +114,7 @@ const OrderList = ({history}) => {
     
   return (
     <>
+    <metadata title = "Order's List" />
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">

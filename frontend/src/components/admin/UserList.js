@@ -107,6 +107,8 @@ const UserList = ({history}) => {
     
   return (
     <>
+    <metadata title = "User's List" />
+
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">

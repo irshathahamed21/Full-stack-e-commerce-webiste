@@ -72,6 +72,8 @@ const UpdateUser = ({ history, match }) => {
 
   return (
     <Fragment>
+    <metadata title = "Update User" />
+
       <div className="dashboard">
         <Sidebar />
         <div className="newProductContainer">

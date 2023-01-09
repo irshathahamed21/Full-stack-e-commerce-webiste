@@ -72,7 +72,7 @@ const UpdateProduct = ({history, match}) => {
         }
        
    
-      }, [dispatch, error, history, isUpdated, updateError, productId, product, history, alert]);
+      }, [dispatch, error, history, isUpdated, updateError, productId, product, alert]);
     
 
     const updateProductSubmitHandler = (e) => {
@@ -111,6 +111,8 @@ const UpdateProduct = ({history, match}) => {
     
   return (
     <>
+    <metadata title = "Update Product" />
+
     <div className="dashboard">
         <Sidebar/>
         <div className="newProductContainer">

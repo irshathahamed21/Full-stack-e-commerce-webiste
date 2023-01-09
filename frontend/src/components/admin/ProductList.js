@@ -103,11 +103,13 @@ const ProductList = ({history}) => {
         }
         dispatch(getAdminProduct())
 
-    },[dispatch, isDeleted, error, deleteError, history])
+    },[dispatch, isDeleted, error, deleteError, history, alert])
 
     
   return (
     <>
+    <metadata title = "Product's List" />
+
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">

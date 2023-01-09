@@ -69,6 +69,9 @@ const Dashboard = () => {
 
 
   return (
+    <>
+   <metadata title = "Dashboard- Admin Panel"/>
+
     <div className="dashboard">
         <Sidebar/>
         <div className="dashboardContainer">
@@ -79,7 +82,7 @@ const Dashboard = () => {
             <div className="dashboardSummary">
               <div>
                 <p>
-                  Total Amount <br/> 2000
+                  Total Amount <br/> {orders && totalAmount}
                 </p>
               </div>
             <div className="dashboardSummaryBox2">
@@ -105,6 +108,7 @@ const Dashboard = () => {
           </div>
         </div>
     </div>
+    </>
   )
 }
 

@@ -5,11 +5,10 @@ import Star from "@material-ui/icons/Star";
 import { Button } from "@material-ui/core";
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { clearErrors, deleteReviews, getAllReviews } from '../../actions/productAction';
 import DeleteIcon from "@material-ui/icons/Delete";
-import Star from "@material-ui/icons/Star";
 import { DELETE_REVIEW_RESET } from '../../constants/productConstants';
+import "./productReviews.css"
 
 const ProductReviews = ({history}) => {
   const [productId, setProductId] = useState("")
@@ -30,7 +29,7 @@ const ProductReviews = ({history}) => {
   };
 
   useEffect(() => {
-    if (productId.length === 24) {
+    if (productId && productId.length === 24) {
       dispatch(getAllReviews(productId))
       
     }
@@ -77,7 +76,7 @@ const ProductReviews = ({history}) => {
         minWidth:180,
         flex:0.4,
         cellClassName:(params) => {
-          return params.getValue(params.id, "rating") > 3 ? "greenColor" :"redColor"
+          return params.getValue(params.id, "rating") >= 3 ? "greenColor" :"redColor"
 
         }
     },
@@ -91,7 +90,7 @@ const ProductReviews = ({history}) => {
         renderCell:(params) => {
             return (
                 <>
-                <Button onClick = {deleteReviewHandler(params.getValue(params.id, "id"))} >
+                <Button onClick = { () => deleteReviewHandler(params.getValue(params.id, "id"))} >
                   <DeleteIcon />
                 </Button>
                 </>
@@ -116,14 +115,10 @@ const ProductReviews = ({history}) => {
       })
   })
 
-
-  useEffect(() => {
-
-  },[])
-  
-
   return (
     <>
+    <metadata title = "Product Reviews" />
+
     <div className="dashboard">
       <Sidebar/>
       
@@ -152,14 +147,18 @@ const ProductReviews = ({history}) => {
 
         </form>
         
-        <DataGrid
-          rows = {rows}
-          colums = {columns}
-          pageSize={10}
-          disableSelectionOnClick
-          className="productListTable"
-          autoHeight
-        />
+     {reviews && reviews.length == 0 ? (
+      <div> No Reviews Yet</div>
+     ) : (
+      <DataGrid
+      rows = {rows}
+      columns = {columns}
+      pageSize={10}
+      disableSelectionOnClick
+      className="productListTable"
+      autoHeight
+    />
+     )}
       </div>
 
     </div>

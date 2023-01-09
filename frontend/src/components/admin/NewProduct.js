@@ -53,7 +53,7 @@ const NewProduct = ({history}) => {
           history.push("/admin/dashboard");
           dispatch({type:NEW_PRODUCT_RESET})
         }
-      }, [dispatch, error, history, success]);
+      }, [dispatch, error, history, success, alert]);
     
 
     const createProductSubmitHandler = (e) => {
@@ -90,6 +90,7 @@ const NewProduct = ({history}) => {
     
   return (
     <>
+    <metadata title = "Create Product" />
     <div className="dashboard">
         <Sidebar/>
         <div className="newProductContainer">
