@@ -18,13 +18,15 @@ const Home = () => {
         alert.error(error)
       }
       dispatch(getProduct())
-    }, [dispatch, error])
+    }, [dispatch, error, alert])
     
   return (
     <>
+    <metadata title = "E-Commerce" />
     
     {loading ?  (<Loader/>  ) : (
       <>
+      <div className = "home">
       <div className="banner">
       <p>Welocme to E Commerce</p>
       <h1>Find amazing products below </h1>  
@@ -43,6 +45,7 @@ const Home = () => {
           <ProductCard key = {product._id}  product = {product}/>
         ))}
       </div> 
+      </div>
       </>
        )}
     

@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import { Rating } from "@material-ui/lab";
-
+import "./home.css"
 
 
 const ProductCard = ({product}) => {
-  console.log(product)
+ 
 
   let options = {
     value:product.ratings,
@@ -24,7 +24,7 @@ const ProductCard = ({product}) => {
           <span className = "productCardSpan" > {" "}({product.numReviews} Reviews)</span>
 
         </div>
-        <span>{product.price}</span>
+        <span>₹ {product.price}</span>
     </div>
     </Link>
 
