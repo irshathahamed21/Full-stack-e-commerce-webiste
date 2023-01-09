@@ -87,7 +87,10 @@ const ProductDetails = () => {
     }
     
     return ( 
-        loading ? <> <Loader/> </> :
+        <>
+    <metadata title = "Product Details" />
+
+        {loading ?  <Loader/> :
     <>
     <div className="productDetails">
         <div>
@@ -193,6 +196,8 @@ const ProductDetails = () => {
         <div className='noReviews'>No Reviews Yet </div>
     )}
 
+    </>
+}
     </>
   )
 }
