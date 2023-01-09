@@ -39,7 +39,10 @@ const Cart = ({history}) => {
 
   return (
     <>
+    <metadata title = "Cart" />
+
     {
+        
         cartItems.length === 0 ? (
             <div className = "emptyCart">
                 <RemoveShoppingCartIcon />

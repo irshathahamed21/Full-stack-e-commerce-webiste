@@ -42,6 +42,8 @@ const ConfirmOrder = ({history}) => {
 
   return (
     <>
+    <metadata title = "Confirm Order" />
+
     <CheckoutSteps activeStep = {1} />
     <div className="confirmOrderPage">
       <div>

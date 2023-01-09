@@ -115,6 +115,7 @@ const Payment = ({history}) => {
 
   return (
     <>
+    <metadata title = "Payment Info" />
      <CheckoutSteps activeStep = {2} />
     <div className="paymentContainer">
         <form  className="paymentForm" onSubmit = {(e) => submitHandler(e)}>

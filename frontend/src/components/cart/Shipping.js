@@ -21,6 +21,8 @@ const Shipping = ({history}) => {
     const [country, setCountry] = useState(shippingInfo.country)
     const[pinCode, setPinCode] = useState(shippingInfo.pinCode)
     const[phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo)
+    const alert = useAlert()
+    
 
     const shippingSubmit = (e) => {
       e.preventDefault()
@@ -35,6 +37,8 @@ const Shipping = ({history}) => {
 
   return (
    <>
+    <metadata title = "Shipping details" />
+
    <CheckoutSteps activeStep={0} />
     <div className="shippingContainer">
         <div className="shippingBox">
