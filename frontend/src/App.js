@@ -12,7 +12,6 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import Cart from "./components/cart/Cart"
 import store from "./store"
 import { loadUser } from "./actions/userAction";
-import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
 import "./App.css";
 import UserOptions from "./components/layout/header/UserOptions";
@@ -40,7 +39,7 @@ import ProductReviews from "./components/admin/ProductReviews";
 
 
 function App() {
-    const {loading, isAuthenticated, user} = useSelector((state) => state.user)
+    const { isAuthenticated, user} = useSelector((state) => state.user)
 
     const [stripeApiKey, setStripeApiKey] = useState("")
 
@@ -49,7 +48,7 @@ function App() {
       console.log(data)
       setStripeApiKey(data.stripeApiKey)
     }
-   console.log(stripeApiKey)
+ 
     useEffect(() => {
         WebFont.load({
           google: {
@@ -65,8 +64,8 @@ function App() {
   return (
    
     <Router>
-      <Header/>
-      {isAuthenticated  && <UserOptions user = {user} /> }
+      {isAuthenticated ? <Header   user = {user}  /> : <Header/> }
+     
       {stripeApiKey && (
         <Elements stripe={loadStripe(stripeApiKey)}>
           <ProtectedRoute exact path="/process/payment" component={Payment} />
@@ -77,7 +76,7 @@ function App() {
       
       <Route exact path = "/" component = {Home} />
       <Route exact path = "/product/:id" component = {ProductDetails} />
-      {/* <Route exact path = "/products" component={Products}/> */}
+      <Route exact path = "/products" component={Products}/>
       <Route path="/products/:keyword" component={Products} />
       <Route exact path = "/search" component={Search}/>
       <Route exact path = "/login" component = {LoginSignup}/>
@@ -101,10 +100,10 @@ function App() {
       <ProtectedRoute exact path = "/admin/order/:id" isAdmin = {true} component = {ProcessOrder}/>
       <ProtectedRoute exact path = "/admin/users" isAdmin = {true} component = {UserList}/>
       <ProtectedRoute exact path = "/admin/user/:id" isAdmin = {true} component = {UpdateUser}/>
-      <ProtectedRoute exact path = "/admin/produt/reviews" isAdmin = {true} component = {ProductReviews}/>
+      <ProtectedRoute exact path = "/admin/reviews" isAdmin = {true} component = {ProductReviews}/>
       </Switch>
       <Footer/>
-      // 07:10 -08:05
+      {/* // 07:10 -08:05 */}
     </Router>
   )
 }
