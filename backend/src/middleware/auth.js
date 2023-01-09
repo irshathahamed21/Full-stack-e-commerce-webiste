@@ -29,8 +29,5 @@ exports.authorizeRoles = (...roles) => {
         // if user is admin then if condtion will be false
         next()
 
-    }
-
-
-    
+    }    
 }
