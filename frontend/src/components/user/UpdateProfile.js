@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {useAlert} from "react-alert"
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
-import { loadUser, updateProfile } from '../../actions/userAction';
+import { clearErrors, loadUser, updateProfile } from '../../actions/userAction';
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstants';
 import Loader from '../layout/loader/Loader';
 
@@ -52,6 +52,11 @@ const UpdateProfile = ({history}) => {
       setAvatarPreview(user.avatar.url)
     }
 
+    if(error){
+      alert.error(error)
+      dispatch(clearErrors())
+    }
+
    if(isUpdated){
     alert.success("Profile Updated Successfully");
     dispatch(loadUser());
@@ -63,7 +68,7 @@ const UpdateProfile = ({history}) => {
    }
 
 
-  },[user,isUpdated, dispatch, history, alert])
+  },[user,isUpdated, dispatch, history, alert, error])
 
 
   
