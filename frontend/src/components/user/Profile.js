@@ -10,12 +10,12 @@ function Profile({history}) {
 
     const {loading, isAuthenticated, user} = useSelector((state)=> state.user)
     console.log(user)
-    // useEffect(() => {
-    //     if(isAuthenticated === false){
-    //         history.push("/history")
-    //     }
+    useEffect(() => {
+        if(isAuthenticated === false){
+            history.push("/history")
+        }
 
-    // },[])
+    },[history, isAuthenticated])
 
 
     return  (
