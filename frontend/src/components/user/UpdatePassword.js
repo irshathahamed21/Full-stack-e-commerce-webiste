@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "./updatePassword.css"
 import {useDispatch, useSelector} from "react-redux"
 import {useAlert} from "react-alert"
-import { updatePassword } from '../../actions/userAction';
+import { clearErrors, updatePassword } from '../../actions/userAction';
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants';
 import Loader from '../layout/loader/Loader';
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -33,7 +33,10 @@ const UpdatePassword = ({history}) => {
   }
 
   useEffect(() => {
-  
+    if(error){
+      alert.error(error)
+      dispatch(clearErrors())
+    }
 
     if (isUpdated) {
       alert.success("Profile updated Successfully");
