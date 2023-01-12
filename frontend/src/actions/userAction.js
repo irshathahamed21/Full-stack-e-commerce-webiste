@@ -49,9 +49,9 @@ export const login = (email,password) => async (dispatch) => {
         const config = {headers: {"Content-Type":"application/json"}}
 
         const {data} = await axios.post(`/irshath-e-commerce-store/login`, {email,password}, config)
-        
+        console.log(data)
 
-        dispatch({type:LOGIN_SUCCESS,payload:data.user})
+        dispatch({type:LOGIN_SUCCESS,payload:data})
     }
     catch(error) {
         dispatch({type:LOGIN_FAIL,payload:error.response.data.message})
