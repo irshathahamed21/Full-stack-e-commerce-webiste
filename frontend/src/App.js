@@ -40,7 +40,7 @@ import ProductReviews from "./components/admin/ProductReviews";
 
 function App() {
     const { isAuthenticated, user} = useSelector((state) => state.user)
-
+    console.log(user)
     const [stripeApiKey, setStripeApiKey] = useState("")
 
     async function getStripeApikey(){
@@ -64,8 +64,8 @@ function App() {
   return (
    
     <Router >
-      {isAuthenticated ? <Header   user = {user}  /> : <Header/> }
-     
+      <Header user = {user}  />
+      
       {stripeApiKey && (
         <Elements stripe={loadStripe(stripeApiKey)}>
           <ProtectedRoute exact path="/process/payment" component={Payment} />
