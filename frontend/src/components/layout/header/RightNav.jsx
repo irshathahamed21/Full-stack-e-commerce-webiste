@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from "react-router-dom"
 import UserOptions from './UserOptions';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 
 const Ul = styled.ul`
   list-style: none;
@@ -39,15 +42,21 @@ const Ul = styled.ul`
    
   }
 `;
+const RightNav = ({ open }) => {
+  const { isAuthenticated, user} = useSelector((state) => state.user)
 
-const RightNav = ({ open ,user}) => {
+  useEffect(()=>{
+
+  },[isAuthenticated])
+
+
   return (
     <Ul open={open}>
       <li><Link to = "/" >Home </Link></li>
       <li><Link to = "/products" >Products </Link></li>
       <li><Link to = "/about" >About </Link></li>
       <li><Link to = "/contact" >Contact </Link></li> 
-     { user ?<li><UserOptions user = {user} /></li> : <li><Link to = "/login" >Sign In </Link></li>}
+     { isAuthenticated ?<li><UserOptions user = {user} /></li> : <li><Link to = "/login" >Sign In </Link></li>}
     </Ul>
   )
 }
