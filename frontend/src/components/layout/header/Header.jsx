@@ -5,6 +5,7 @@ import "./header.css"
 import logo from "../../../images/logo.png";
 
 const Nav = styled.nav`
+
   width: calc(100%- 40px);
   height: 75px;
   border-bottom: 2px solid #b49e9e;
@@ -24,13 +25,14 @@ const Nav = styled.nav`
   }
 `
 
-const Header = ({user}) => {
+const Header = () => {
+
   return (
     <Nav className = "navbar">
       <div className="logo">
         <img src = {logo} alt = "logo" />   
     </div>
-      <Burger user = {user}/>
+      <Burger/>
     </Nav>
   )
 }
