@@ -23,9 +23,7 @@ const Home = () => {
   return (
     <>
     <metadata title = "E-Commerce" />
-    
-    {loading ?  (<Loader/>  ) : (
-      <>
+      
       <div className = "home">
       <div className="banner">
       <p>Welocme to E Commerce</p>
@@ -39,19 +37,21 @@ const Home = () => {
       <h2 className = "homeHeading">
       Featured Products
       </h2>
-      <div className="container" id = "container">
+    
+      {loading ?  <Loader/>   : (
+        <div className="container" id = "container">
        { products && 
         products.map((product) => (
           <ProductCard key = {product._id}  product = {product}/>
-        ))}
-      </div> 
+        ))
+      }
       </div>
-      </>
-       )}
-    
-
+      )
+      }
+      </div> 
     </>
   )
+  
 }
 
 export default Home
