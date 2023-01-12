@@ -80,7 +80,7 @@ const LoginSignup = ( {history, location}) => {
         }
     }
 
-    const redirect = location.search ? location.search.split("=")[1] :"/home"
+    const redirect = location.search ? location.search.split("=")[1] :"/"
 
     useEffect(() => {
         if(error){
