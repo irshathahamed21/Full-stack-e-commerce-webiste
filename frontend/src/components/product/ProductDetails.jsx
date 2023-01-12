@@ -18,6 +18,7 @@ import ReviewCard from './ReviewCard';
 import { addItemsToCart } from '../../actions/cartAction';
 import { NEW_REVIEW_RESET } from '../../constants/productConstants';
 import {useAlert} from "react-alert"
+import ProductImages from "./ProductImages"
 
 const ProductDetails = () => {
     const[rating, setRating] = useState(0)
@@ -30,6 +31,7 @@ const ProductDetails = () => {
     const {success, error:reviewError } = useSelector((state) => state.newReview)
     const  {id} = params
     const alert = useAlert()
+    console.log(product)
 
     const increaseQuantity = () => {
         if (product.Stock <= quantity) return;
@@ -92,20 +94,9 @@ const ProductDetails = () => {
 
         {loading ?  <Loader/> :
     <>
-    <div className="productDetails">
+    <div className="ProductDetails">
         <div>
-            <Carousel>
-                {
-                    product.images && 
-                    product.images.map((item,i) => (
-                        <img src = {item.url}  
-                            className = "carouselImage"
-                            alt = {`${i} Slide`}
-                            key = {i}
-                                />
-                    ))
-                }
-            </Carousel>     
+           {product && <ProductImages prod = {product}/>}
         </div>
         <div>
             <div className="detailsBlock_1">
