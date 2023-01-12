@@ -35,7 +35,7 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = ({user}) => {
+const Burger = () => {
   const [open, setOpen] = useState(false)
   
   return (
@@ -45,7 +45,7 @@ const Burger = ({user}) => {
         <div/>
         <div />
       </StyledBurger>
-      <RightNav open={open} user = {user}/>
+      <RightNav open={open} />
     </>
   )
 }
