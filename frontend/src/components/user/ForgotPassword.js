@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                 Forgot Password
             </h2>
             <form className='forgotPasswordForm' onSubmit={forgotPasswordSubmit}>
-                // now 1:20 superb lunch for 20 min
+              
                 <div className="forgotPasswordEmail">
                     <input 
                         type = "email"
