@@ -1,7 +1,7 @@
 import {useEffect} from "react"
 import {useSelector} from "react-redux"
-import {Link} from "react-router-dom"
-import Loader from "../layout/loader/Loader"
+import {Link} from "react-router-dom";
+import Loader from "../layout/loader/Loader";
 import "./profile.css"
 
 
