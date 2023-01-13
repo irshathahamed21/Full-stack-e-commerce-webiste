@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import {useEffect} from "react"
 import {useSelector} from "react-redux"
 import {Link} from "react-router-dom"
 import Loader from "../layout/loader/Loader"
