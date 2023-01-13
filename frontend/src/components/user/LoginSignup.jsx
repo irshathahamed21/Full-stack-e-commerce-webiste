@@ -6,10 +6,9 @@ import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {login,register} from "../../actions/userAction";
 import Loader from '../layout/loader/Loader';
-import "./loginsignup.css"
 import { useAlert } from 'react-alert';
 import { clearErrors } from '../../actions/productAction';
-
+import "./loginsignup.css";
 
 
 const LoginSignup = ( {history, location}) => {

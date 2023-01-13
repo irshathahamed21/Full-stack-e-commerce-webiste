@@ -1,10 +1,10 @@
-import React from 'react'
-import "./ForgotPassword.css"
+import React from 'react';
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import { useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { useEffect } from 'react';
 import { forgotPassword } from '../../actions/userAction';
+import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
     const dispatch = useDispatch()

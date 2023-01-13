@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import "./updatePassword.css"
 import {useDispatch, useSelector} from "react-redux"
 import {useAlert} from "react-alert"
 import { clearErrors, updatePassword } from '../../actions/userAction';
@@ -8,6 +7,7 @@ import Loader from '../layout/loader/Loader';
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import "./updatePassword.css"
 
 
 const UpdatePassword = ({history}) => {

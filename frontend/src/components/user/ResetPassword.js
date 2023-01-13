@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import "./ResetPassword.css";
-import Loader from '../layout/loader/Loader';
+import Loader from "../layout/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, resetPassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
+import Loader from "../layout/loader/Loader";
+import "./ResetPassword.css";
+
 
 const ResetPassword = ({ history, match }) => {
   const dispatch = useDispatch();

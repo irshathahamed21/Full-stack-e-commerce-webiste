@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import "./updateProfile.css"
 import {useDispatch, useSelector} from "react-redux"
 import {useAlert} from "react-alert"
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
@@ -7,6 +6,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import { clearErrors, loadUser, updateProfile } from '../../actions/userAction';
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstants';
 import Loader from '../layout/loader/Loader';
+import "./updateProfile.css"
 
 
 
