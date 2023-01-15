@@ -8,6 +8,8 @@ import LaunchIcon from "@material-ui/icons/Launch";
 import { clearErrors, myOrders } from '../../actions/orderAction'
 import "./myOrders.css"
 import { useAlert } from 'react-alert'
+import Metadata from '../layout/Metadata';
+
 
 const MyOrders = () => {
     const dispatch = useDispatch()
@@ -81,7 +83,7 @@ const MyOrders = () => {
     
     return (
    <>
-    <metadata title = "My Orders" />
+    <Metadata title = "My Orders" />
 
    {
     loading ? (<Loader/>) :

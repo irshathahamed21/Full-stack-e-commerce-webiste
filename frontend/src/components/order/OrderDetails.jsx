@@ -6,6 +6,7 @@ import { Typography } from "@material-ui/core";
 import { getOrderDetails, clearErrors } from "../../actions/orderAction";
 import Loader from "../layout/loader/Loader"
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
 
 
 const OrderDetails = ({ match }) => {
@@ -24,7 +25,7 @@ const OrderDetails = ({ match }) => {
   }, [dispatch, error, match.params.id, alert]);
   return (
     <Fragment>
-    <metadata title = "Order Details" />
+    <Metadata title = "Order Details" />
 
       {loading ? (
         <Loader />
