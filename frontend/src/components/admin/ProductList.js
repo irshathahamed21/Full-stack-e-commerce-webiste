@@ -11,6 +11,7 @@ import { clearErrors, deleteProduct, getAdminProduct } from '../../actions/produ
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 import "./productlist.css"
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
 
 
 const ProductList = ({history}) => {
@@ -108,7 +109,7 @@ const ProductList = ({history}) => {
     
   return (
     <>
-    <metadata title = "Product's List" />
+    <Metadata title = "Product's List" />
 
     <div className="dashboard">
         <Sidebar/>

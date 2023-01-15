@@ -12,6 +12,7 @@ import { clearErrors } from '../../actions/productAction'
 import { DELETE_ORDER_RESET } from '../../constants/orderConstants'
 import "./productlist.css"
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
 
 
 
@@ -114,7 +115,7 @@ const OrderList = ({history}) => {
     
   return (
     <>
-    <metadata title = "Order's List" />
+    <Metadata title = "Order's List" />
     <div className="dashboard">
         <Sidebar/>
         <div className="productListContainer">

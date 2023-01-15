@@ -13,7 +13,9 @@ import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import { Button } from "@material-ui/core";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import "./processOrder.css";
+import Metadata from '../layout/Metadata';
 import { useAlert } from "react-alert";
+
 
 
 const ProcessOrder = ({ history, match }) => {
@@ -55,7 +57,7 @@ const ProcessOrder = ({ history, match }) => {
 
   return (
     <Fragment>
-    <metadata title = "Process Order" />
+    <Metadata title = "Process Order" />
 
       <div className="dashboard">
         <Sidebar />

@@ -11,11 +11,12 @@ import { createProduct, clearErrors } from '../../actions/productAction';
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 import "./newProduct.css"
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
 
 
 const NewProduct = ({history}) => {
     const dispatch = useDispatch()
-    const {loading, error, success, product} = useSelector((state) => state.newProduct)
+    const {loading, error, success} = useSelector((state) => state.newProduct)
     console.log(success)
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
@@ -90,7 +91,7 @@ const NewProduct = ({history}) => {
     
   return (
     <>
-    <metadata title = "Create Product" />
+    <Metadata title = "Create Product" />
     <div className="dashboard">
         <Sidebar/>
         <div className="newProductContainer">

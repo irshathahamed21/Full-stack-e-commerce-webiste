@@ -10,6 +10,8 @@ import { useEffect } from 'react'
 import { DELETE_USER_RESET } from '../../constants/userConstants'
 import { deleteUser, getAllUsers, clearErrors } from '../../actions/userAction'
 import { useAlert } from 'react-alert'
+import Metadata from '../layout/Metadata';
+
 
 const UserList = ({history}) => {
     const dispatch = useDispatch()
@@ -107,7 +109,7 @@ const UserList = ({history}) => {
     
   return (
     <>
-    <metadata title = "User's List" />
+    <Metadata title = "User's List" />
 
     <div className="dashboard">
         <Sidebar/>

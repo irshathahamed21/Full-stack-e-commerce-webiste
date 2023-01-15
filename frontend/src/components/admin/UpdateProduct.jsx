@@ -11,6 +11,7 @@ import { updateProduct, clearErrors, getProductDetails } from '../../actions/pro
 import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants';
 import "./updateProduct.css"
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
 
 
 const UpdateProduct = ({history, match}) => {
@@ -111,7 +112,7 @@ const UpdateProduct = ({history, match}) => {
     
   return (
     <>
-    <metadata title = "Update Product" />
+    <Metadata title = "Update Product" />
 
     <div className="dashboard">
         <Sidebar/>

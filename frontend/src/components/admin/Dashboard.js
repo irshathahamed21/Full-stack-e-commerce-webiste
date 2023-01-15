@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getAdminProduct } from '../../actions/productAction';
 import { getAllUsers } from '../../actions/userAction';
 import { getAllOrders } from '../../actions/orderAction';
+import Metadata from '../layout/Metadata';
 
 
 
@@ -70,7 +71,7 @@ const Dashboard = () => {
 
   return (
     <>
-   <metadata title = "Dashboard- Admin Panel"/>
+   <Metadata title = "Dashboard- Admin Panel"/>
 
     <div className="dashboard">
         <Sidebar/>

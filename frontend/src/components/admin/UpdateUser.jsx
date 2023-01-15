@@ -14,6 +14,8 @@ import {
 } from "../../actions/userAction";
 import Loader from "../layout/loader/Loader";
 import "./updateProduct.css"
+import Metadata from '../layout/Metadata';
+
 
 const UpdateUser = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -72,7 +74,7 @@ const UpdateUser = ({ history, match }) => {
 
   return (
     <Fragment>
-    <metadata title = "Update User" />
+    <Metadata title = "Update User" />
 
       <div className="dashboard">
         <Sidebar />
