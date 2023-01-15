@@ -6,6 +6,8 @@ import CartItemCard from './CartItemCard'
 import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import {Link} from "react-router-dom"
+import Metadata from '../layout/Metadata';
+
 
 const Cart = ({history}) => {
     const dispatch = useDispatch()
@@ -39,7 +41,7 @@ const Cart = ({history}) => {
 
   return (
     <>
-    <metadata title = "Cart" />
+    <Metadata title = "Cart" />
 
     {
         

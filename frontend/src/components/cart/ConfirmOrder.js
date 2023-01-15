@@ -4,6 +4,8 @@ import {Typography} from "@material-ui/core"
 import {Link} from "react-router-dom"
 import CheckoutSteps from "./CheckoutSteps"
 import "./confirmOrder.css"
+import Metadata from '../layout/Metadata';
+
 
 
 const ConfirmOrder = ({history}) => {
@@ -42,7 +44,7 @@ const ConfirmOrder = ({history}) => {
 
   return (
     <>
-    <metadata title = "Confirm Order" />
+    <Metadata title = "Confirm Order" />
 
     <CheckoutSteps activeStep = {1} />
     <div className="confirmOrderPage">

@@ -11,6 +11,8 @@ import "./shipping.css"
 import { saveShippingInfo } from '../../actions/cartAction';
 import CheckoutSteps from './CheckoutSteps';
 import { useAlert } from 'react-alert';
+import Metadata from '../layout/Metadata';
+
 
 const Shipping = ({history}) => {
     const dispatch = useDispatch()
@@ -37,7 +39,7 @@ const Shipping = ({history}) => {
 
   return (
    <>
-    <metadata title = "Shipping details" />
+    <Metadata title = "Shipping details" />
 
    <CheckoutSteps activeStep={0} />
     <div className="shippingContainer">

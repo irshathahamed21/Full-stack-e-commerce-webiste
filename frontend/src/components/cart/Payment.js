@@ -16,6 +16,8 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import CheckoutSteps from "./CheckoutSteps" 
 import { createOrder , clearErrors} from "../../actions/orderAction";
 import { useAlert } from "react-alert";
+import Metadata from '../layout/Metadata';
+
 
 const Payment = ({history}) => {
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"))
@@ -115,7 +117,7 @@ const Payment = ({history}) => {
 
   return (
     <>
-    <metadata title = "Payment Info" />
+    <Metadata title = "Payment Info" />
      <CheckoutSteps activeStep = {2} />
     <div className="paymentContainer">
         <form  className="paymentForm" onSubmit = {(e) => submitHandler(e)}>
