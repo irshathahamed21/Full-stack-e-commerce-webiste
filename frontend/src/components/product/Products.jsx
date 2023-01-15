@@ -10,6 +10,7 @@ import Slider from "@material-ui/core/Slider";
 import "./products.css"
 import { Typography } from '@material-ui/core';
 import { useAlert } from 'react-alert';
+import Metadata from '../layout/Metadata';
 
 const Products = () => {
   const dispatch = useDispatch()
@@ -49,12 +50,12 @@ const Products = () => {
       dispatch(clearErrors())
     }
       dispatch(getProduct(keyword, currentPage, price, category, ratings))
-  },[dispatch, keyword, currentPage, price, ratings, error, alert])
+  },[dispatch, keyword, currentPage, price, category, ratings, error, alert])
 
 
   return (
     <>
-    <metadata title = "Products" />
+    <Metadata title = "Products" />
 
     {loading ? (
       <Loader/>
