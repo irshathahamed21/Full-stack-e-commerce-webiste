@@ -8,6 +8,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import "./updatePassword.css"
+import Metadata from '../layout/Metadata';
 
 
 const UpdatePassword = ({history}) => {
@@ -54,7 +55,7 @@ const UpdatePassword = ({history}) => {
 
   return (
     <>
-    <metadata title = "Update Password" />
+    <Metadata title = "Update Password" />
 
     {
       loading ? <Loader/> :

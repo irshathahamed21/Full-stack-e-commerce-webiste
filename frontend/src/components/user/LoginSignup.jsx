@@ -9,6 +9,7 @@ import Loader from '../layout/loader/Loader';
 import { useAlert } from 'react-alert';
 import { clearErrors } from '../../actions/productAction';
 import "./loginsignup.css";
+import Metadata from '../layout/Metadata';
 
 
 const LoginSignup = ( {history, location}) => {
@@ -116,7 +117,7 @@ const LoginSignup = ( {history, location}) => {
     
   return (
     <>
-    <metadata title = "User Register" />
+    <Metadata title = "User Register" />
     {loading ? (<Loader/> ) : (
         <>
         <div className="LoginSignupContainer">

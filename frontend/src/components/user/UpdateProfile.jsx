@@ -7,6 +7,7 @@ import { clearErrors, loadUser, updateProfile } from '../../actions/userAction';
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstants';
 import Loader from '../layout/loader/Loader';
 import "./updateProfile.css"
+import Metadata from '../layout/Metadata';
 
 
 
@@ -76,7 +77,7 @@ const UpdateProfile = ({history}) => {
 
   return (
     <>
-    <metadata title = "Update Profile" />
+    <Metadata title = "Update Profile" />
     {
       loading ? <Loader/> :
       <>

@@ -2,6 +2,7 @@ import {useEffect} from "react"
 import {useSelector} from "react-redux"
 import {Link} from "react-router-dom";
 import Loader from "../layout/loader/Loader";
+import Metadata from "../layout/Metadata";
 import "./profile.css"
 
 
@@ -20,7 +21,7 @@ function Profile({history}) {
 
     return  (
        <>
-        <metadata title = "User's Profile" />
+        <Metadata title = "User's Profile" />
 
        {    loading ? (<Loader/> ): (   <>
             <div className="profileContainer">
