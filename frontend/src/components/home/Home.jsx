@@ -6,6 +6,7 @@ import {useSelector, useDispatch} from "react-redux"
 import "./home.css"
 import { clearErrors, getProduct } from '../../actions/productAction';
 import Loader from '../layout/loader/Loader';
+import Metadata from '../layout/Metadata';
 
 
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
     
   return (
     <>
-    <metadata title = "E-Commerce" />
+    <Metadata title = "E-Commerce" />
       
       <div className = "home">
       <div className="banner">
