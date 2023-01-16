@@ -14,7 +14,6 @@ import store from "./store"
 import { loadUser } from "./actions/userAction";
 import {useSelector} from "react-redux";
 import "./App.css";
-import UserOptions from "./components/layout/header/UserOptions";
 import Profile from "./components/user/Profile";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import UpdatePassword from "./components/user/UpdatePassword";
@@ -37,15 +36,14 @@ import ProcessOrder from "./components/admin/ProcessOrder";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 
-
 function App() {
-    const { isAuthenticated, user} = useSelector((state) => state.user)
+    const { user} = useSelector((state) => state.user)
     console.log(user)
     const [stripeApiKey, setStripeApiKey] = useState("")
 
     async function getStripeApikey(){
       const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
-      console.log(data)
+    
       setStripeApiKey(data.stripeApiKey)
     }
  
