@@ -40,12 +40,15 @@ function App() {
     const { user} = useSelector((state) => state.user)
     console.log(user)
     const [stripeApiKey, setStripeApiKey] = useState("")
+    console.log(stripeApiKey)
 
     async function getStripeApikey(){
       const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
-    
+      console.log(data)
       setStripeApiKey(data.stripeApiKey)
     }
+
+   
  
     useEffect(() => {
         WebFont.load({
@@ -54,7 +57,8 @@ function App() {
           },
         })
         store.dispatch(loadUser() )
-        getStripeApikey()
+         getStripeApikey()
+       
     },[])
 
  
