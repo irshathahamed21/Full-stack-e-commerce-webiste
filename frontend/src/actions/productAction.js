@@ -65,7 +65,7 @@ export const getAdminProduct = () => async(dispatch) => {
         dispatch({type:ADMIN_PRODUCT_REQUEST})
 
         const {data} = await axios.get("/irshath-e-commerce-store/admin/products")
-        console.log(data)
+        console.log("getAdminProductsAll", data)
         dispatch({type:ADMIN_PRODUCT_SUCCESS, payload:data})
 
     } catch (error) {
