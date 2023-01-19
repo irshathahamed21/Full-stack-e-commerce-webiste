@@ -85,12 +85,12 @@ function App() {
       <ProtectedRoute exact path = "/account" component = {Profile} />
       <ProtectedRoute exact path = "/me/update" component = {UpdateProfile}/>
       <ProtectedRoute exact path = "/password/update" component = {UpdatePassword}/>
-      <Route exact path = "/cart" component = {Cart} />
-      <Route exact path = "/shipping" component = {Shipping} />
-      <Route exact path = "/order/confirm" component = {ConfirmOrder} />
-      <Route exact path = "/order/success" component = {OrderSuccess} />
-      <Route exact path = "/orders" component={MyOrders} />
-      <Route exact path = "/order/:id" component = {OrderDetails}/>
+      <ProtectedRoute exact path = "/cart" component = {Cart} />
+      <ProtectedRoute exact path = "/shipping" component = {Shipping} />
+      <ProtectedRoute exact path = "/success" component = {OrderSuccess} />
+      <ProtectedRoute exact path = "/orders" component={MyOrders} />
+      <ProtectedRoute exact path = "/order/confirm" component = {ConfirmOrder} />
+      <ProtectedRoute exact path = "/order/:id" component = {OrderDetails}/>
       
       {/* <Route exact path = "/process/payment" component = {Payment}/> */}
     
