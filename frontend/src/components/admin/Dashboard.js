@@ -73,7 +73,7 @@ const Dashboard = () => {
   return (
     <>
    <Metadata title = "Dashboard- Admin Panel"/>
-    { productsLoading && ordersLoading && usersLoading ? <Loader/> :
+    { productsLoading || ordersLoading || usersLoading ? <Loader/> :
     <div className="dashboard">
         <Sidebar/>
         <div className="dashboardContainer">
