@@ -11,6 +11,7 @@ import { getAdminProduct } from '../../actions/productAction';
 import { getAllUsers } from '../../actions/userAction';
 import { getAllOrders } from '../../actions/orderAction';
 import Metadata from '../layout/Metadata';
+import Loader from "../layout/loader/Loader";
 
 
 
@@ -18,9 +19,9 @@ const Dashboard = () => {
   Chart.register(LineElement, CategoryScale, ArcElement, LinearScale, PointElement);
 
   const dispatch = useDispatch()
-  const {users} = useSelector((state) => state.allUsers)
-  const {orders} = useSelector((state) => state.allOrders)
-  const {products} = useSelector((state) => state.products)
+  const {loading:usersLoading, users} = useSelector((state) => state.allUsers)
+  const {loading:ordersLoading, orders} = useSelector((state) => state.allOrders)
+  const {loading:productsLoading, products} = useSelector((state) => state.products)
 
   console.log(users, products, orders)
   let outOfStock = 0;
@@ -72,7 +73,7 @@ const Dashboard = () => {
   return (
     <>
    <Metadata title = "Dashboard- Admin Panel"/>
-
+    { productsLoading && ordersLoading && usersLoading ? <Loader/> :
     <div className="dashboard">
         <Sidebar/>
         <div className="dashboardContainer">
@@ -109,6 +110,7 @@ const Dashboard = () => {
           </div>
         </div>
     </div>
+    }
     </>
   )
 }
