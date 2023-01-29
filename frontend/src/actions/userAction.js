@@ -50,6 +50,7 @@ export const login = (email,password) => async (dispatch) => {
 
         const {data} = await axios.post(`/irshath-e-commerce-store/login`, {email,password}, config)
         console.log(data)
+        console.log(data.headers.get("token"))
 
         dispatch({type:LOGIN_SUCCESS,payload:data})
     }

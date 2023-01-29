@@ -78,7 +78,7 @@ const MyOrders = () => {
       dispatch(clearErrors())
     }
     dispatch(myOrders())
-  },[dispatch, error, alert])
+  },[dispatch, alert, error])
 
     
     return (
