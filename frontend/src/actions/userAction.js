@@ -40,6 +40,7 @@ import {
 } from "../constants/userConstants"
 
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 
 export const login = (email,password) => async (dispatch) => {
@@ -50,6 +51,9 @@ export const login = (email,password) => async (dispatch) => {
 
         const {data} = await axios.post("/irshath-e-commerce-store/login", {email,password}, config)
         console.log(data)
+        if(data){
+            Cookies.set('token', data.token, { expires: 7 })
+        }
         
         dispatch({type:LOGIN_SUCCESS, payload:data})
     }
