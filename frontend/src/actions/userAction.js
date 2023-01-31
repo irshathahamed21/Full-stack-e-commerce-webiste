@@ -184,7 +184,9 @@ export const getAllUsers = () => async(dispatch) => {
     try{
         dispatch({type:ALL_USERS_REQUEST})
 
-        const {data} = await axios.get("/irshath-e-commerce-store/admin/users")
+        const {data} = await axios.get("/irshath-e-commerce-store/admin/users", {
+            withCredentials: true
+          })
 
         dispatch({type:ALL_USERS_SUCCESS, payload:data.users})
 

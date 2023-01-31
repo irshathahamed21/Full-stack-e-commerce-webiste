@@ -64,7 +64,9 @@ export const getAdminProduct = () => async(dispatch) => {
     try {
         dispatch({type:ADMIN_PRODUCT_REQUEST})
 
-        const {data} = await axios.get("/irshath-e-commerce-store/admin/products")
+        const {data} = await axios.get("/irshath-e-commerce-store/admin/products", {
+            withCredentials: true
+          })
         console.log("getAdminProductsAll", data)
         dispatch({type:ADMIN_PRODUCT_SUCCESS, payload:data})
 
@@ -79,7 +81,9 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({type:PRODUCT_DETAILS_REQUEST})
 
-        const {data} = await axios.get(`/irshath-e-commerce-store/product/${id}`)
+        const {data} = await axios.get(`/irshath-e-commerce-store/product/${id}`, {
+            withCredentials: true
+          })
 
         console.log(data)
         dispatch({type:PRODUCT_DETAILS_SUCCESS,payload:data})
