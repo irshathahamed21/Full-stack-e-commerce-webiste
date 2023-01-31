@@ -52,7 +52,7 @@ export const login = (email,password) => async (dispatch) => {
         const {data} = await axios.post("/irshath-e-commerce-store/login", {email,password}, config)
         console.log(data)
         if(data){
-            Cookies.set('token', data.token, { expires: 7 })
+            Cookies.set('token', data.token, data.options)
         }
         
         dispatch({type:LOGIN_SUCCESS, payload:data})
