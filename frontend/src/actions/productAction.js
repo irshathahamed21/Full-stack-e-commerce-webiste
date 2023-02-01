@@ -63,10 +63,8 @@ export const getProduct =
 export const getAdminProduct = () => async(dispatch) => {
     try {
         dispatch({type:ADMIN_PRODUCT_REQUEST})
-
-        const {data} = await axios.get("/irshath-e-commerce-store/admin/products", {
-            withCredentials: true
-          })
+        const config = {withCredentials:true}
+        const {data} = await axios.get("/irshath-e-commerce-store/admin/products", config )
         console.log("getAdminProductsAll", data)
         dispatch({type:ADMIN_PRODUCT_SUCCESS, payload:data})
 
@@ -81,9 +79,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({type:PRODUCT_DETAILS_REQUEST})
 
-        const {data} = await axios.get(`/irshath-e-commerce-store/product/${id}`, {
-            withCredentials: true
-          })
+        const {data} = await axios.get(`/irshath-e-commerce-store/product/${id}`)
 
         console.log(data)
         dispatch({type:PRODUCT_DETAILS_SUCCESS,payload:data})
@@ -100,7 +96,7 @@ export const createProduct = (productData) => async (dispatch) => {
     try {
         dispatch({type:NEW_PRODUCT_REQUEST})
 
-        const config = {headers:{"Content-Type":"application/json"}}
+        const config = {headers:{"Content-Type":"application/json"}, withCredentials:true}
         const {data} = await axios.post("/irshath-e-commerce-store/admin/product/new", productData, config )
         dispatch({type:NEW_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
@@ -113,7 +109,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({type:UPDATE_PRODUCT_REQUEST})
 
-        const config = {headers:{"Content-Type":"application/json"}}
+        const config = {headers:{"Content-Type":"application/json"}, withCredentials:true}
 
         const {data} = await axios.put(`/irshath-e-commerce-store/admin/product/${id}`, productData, config)
             console.log(data)
@@ -127,8 +123,9 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({type:DELETE_PRODUCT_REQUEST})
+        const config = {withCredentials:true}
 
-        const {data} = await axios.delete(`/irshath-e-commerce-store/admin/product/${id}`)
+        const {data} = await axios.delete(`/irshath-e-commerce-store/admin/product/${id}`, config)
 
         dispatch({type:DELETE_PRODUCT_SUCCESS, payload:data})
     } catch (error) {
@@ -146,7 +143,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         
         const config = {headers: {
             "Content-Type":"application/json"
-        }}
+        }, withCredentials:true}
         const {data} = await axios.put("/irshath-e-commerce-store/review/create", reviewData, config)
         
         dispatch({type:NEW_REVIEW_SUCCESS, payload:data.success})
@@ -162,8 +159,8 @@ export const newReview = (reviewData) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({type:ALL_REVIEW_REQUEST})
-
-        const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${id}`)
+        const config = {withCredentials:true}
+        const {data} = await axios.get(`/irshath-e-commerce-store/reviews?id=${id}`, config)
         console.log(data)
         dispatch({type:ALL_REVIEW_SUCCESS, payload:data.reviews})
     }   
@@ -175,8 +172,9 @@ export const getAllReviews = (id) => async (dispatch) => {
 export const deleteReviews = (reviewId, productId) => async(dispatch) => {
     try {
         dispatch({type:DELETE_REVIEW_REQUEST})
+        const config = {withCredentials:true}
 
-        const {data} = await axios.delete(`/irshath-e-commerce-store/reviews?id=${reviewId}&productId=${productId}`)
+        const {data} = await axios.delete(`/irshath-e-commerce-store/reviews?id=${reviewId}&productId=${productId}`, config)
         console.log(data)
         dispatch({type:DELETE_REVIEW_SUCCESS, payload:data.success})
     }
