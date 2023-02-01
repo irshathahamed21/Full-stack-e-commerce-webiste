@@ -37,7 +37,11 @@ import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 
 function App() {
-    const { user} = useSelector((state) => state.user)
+    const { user, token} = useSelector((state) => state.user)
+    
+   axios.defaults.headers.common = {
+    'Authorization': `Bearer ${token}`,
+  };
     console.log(user)
     const [stripeApiKey, setStripeApiKey] = useState("")
     console.log(stripeApiKey)
