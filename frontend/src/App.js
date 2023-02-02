@@ -40,20 +40,17 @@ import NotFound from './components/layout/notfound/NotFound';
 
 function App() {
     const { user, token} = useSelector((state) => state.user)
-  
+
+    const stripeApiKey = process.env.STRIPE_API_KEY
     
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
   };
     console.log(user)
-    const [stripeApiKey, setStripeApiKey] = useState("")
+    // const [stripeApiKey, setStripeApiKey] = useState("")
     console.log(stripeApiKey)
 
-    async function getStripeApikey(){
-      const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
-      console.log(data)
-      setStripeApiKey(data.stripeApiKey)
-    }
+  
   
    
  
