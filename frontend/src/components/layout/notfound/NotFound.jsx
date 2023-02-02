@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./notfound.css";
 
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <div className="PageNotFound">
       <ErrorIcon />
@@ -15,4 +15,6 @@ export const NotFound = () => {
     </div>
   );
 };
+
+export default NotFound
 
