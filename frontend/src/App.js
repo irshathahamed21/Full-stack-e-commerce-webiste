@@ -54,10 +54,7 @@ function App() {
       console.log(data)
       setStripeApiKey(data.stripeApiKey)
     }
-    if(!stripeApiKey){
-      setStripeApiKey(process.env.STRIPE_API_KEY)
-    }
-
+  
    
  
     useEffect(() => {
