@@ -7,8 +7,9 @@ import AlertTemplate from 'react-alert-template-basic'
 import store from './store';
 import axios from "axios"
 
-    axios.defaults.baseURL = "https://full-stack-e-commerce-app-backend.onrender.com";
+   axios.defaults.baseURL = "https://full-stack-e-commerce-app-backend.onrender.com";
  
+  
 
 const options = {
   // you can also just use 'bottom center'

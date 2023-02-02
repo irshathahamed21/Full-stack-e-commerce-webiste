@@ -35,9 +35,12 @@ import OrderList from "./components/admin/OrderList"
 import ProcessOrder from "./components/admin/ProcessOrder";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
+import NotFound from './components/layout/notfound/NotFound';
+
 
 function App() {
     const { user, token} = useSelector((state) => state.user)
+  
     
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
@@ -107,6 +110,11 @@ function App() {
       <ProtectedRoute exact path = "/admin/users" isAdmin = {true} component = {UserList}/>
       <ProtectedRoute exact path = "/admin/user/:id" isAdmin = {true} component = {UpdateUser}/>
       <ProtectedRoute exact path = "/admin/reviews" isAdmin = {true} component = {ProductReviews}/>
+      <Route
+          component={
+            window.location.pathname === "/process/payment" ? null : NotFound
+          }
+        />
       </Switch>
       <Footer/>
       {/* // 07:10 -08:05 */}
