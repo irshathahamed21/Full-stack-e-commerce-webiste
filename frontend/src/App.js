@@ -40,12 +40,12 @@ import NotFound from './components/layout/notfound/NotFound';
 
 function App() {
     const { user, token} = useSelector((state) => state.user)
+    const [stripeApiKey, setStripeApiKey] = useState(null)
 
-    const stripeApiKey = async () => {
-      const stripe = process.env.STRIPE_API_KEY
-      return stripe
-    }
-    
+    const getStripeApikey = async() => {
+     setStripeApiKey(process.env.STRIPE_API_KEY)   
+  }
+  
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
   };
@@ -64,7 +64,8 @@ function App() {
           },
         })
         store.dispatch(loadUser() )
-         getStripeApikey()
+        getStripeApikey()
+         
        
     },[])
 
