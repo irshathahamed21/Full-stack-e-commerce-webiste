@@ -42,9 +42,11 @@ function App() {
     const { user, token} = useSelector((state) => state.user)
     const [stripeApiKey, setStripeApiKey] = useState(null)
 
-    const getStripeApikey = async() => {
-     setStripeApiKey(process.env.STRIPE_API_KEY)   
-  }
+   async function getStripeApikey() {
+    const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
+
+    setStripeApiKey(data.stripeApiKey)
+   }
   
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
