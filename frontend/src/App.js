@@ -42,11 +42,11 @@ function App() {
     const { user, token} = useSelector((state) => state.user)
     const [stripeApiKey, setStripeApiKey] = useState(null)
 
-   async function getStripeApikey() {
-    const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
+  //  async function getStripeApikey() {
+  //   const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
 
-    setStripeApiKey(data.stripeApiKey)
-   }
+  //   setStripeApiKey(data.stripeApiKey)
+  //  }
   
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
@@ -66,7 +66,7 @@ function App() {
           },
         })
         store.dispatch(loadUser() )
-        getStripeApikey()
+        // getStripeApikey()
          
        
     },[])
@@ -79,7 +79,7 @@ function App() {
       <Header user = {user}  />
       
       {stripeApiKey && (
-        <Elements stripe={loadStripe(stripeApiKey)}>
+        <Elements stripe={loadStripe(pk_test_51M7fPNSBLINyeutfGMCg1908KqHwIfGPqZviHB9YO5Cd9kiomy0HYbcGsn870uV4KNRniHNuYzXKiYcdiTi2OGse00hbszBZDZ)}>
           <ProtectedRoute exact path="/process/payment" component={Payment} />
         </Elements>
       )}
@@ -102,8 +102,6 @@ function App() {
       <ProtectedRoute exact path = "/order/confirm" component = {ConfirmOrder} />
       <ProtectedRoute exact path = "/order/:id" component = {OrderDetails}/>
       
-      {/* <Route exact path = "/process/payment" component = {Payment}/> */}
-    
       <ProtectedRoute exact path = "/admin/dashboard" isAdmin = {true} component = {Dashboard}/>
       <ProtectedRoute exact path = "/admin/products" isAdmin = {true} component = {ProductList}/>
       <ProtectedRoute exact path = "/admin/product" isAdmin = {true} component = {NewProduct}/>
