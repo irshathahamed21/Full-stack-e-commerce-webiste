@@ -40,7 +40,7 @@ import NotFound from './components/layout/notfound/NotFound';
 
 function App() {
     const { user, token} = useSelector((state) => state.user)
-    const [stripeApiKey, setStripeApiKey] = useState(null)
+    const stripeApiKey = pk_test_51M7fPNSBLINyeutfGMCg1908KqHwIfGPqZviHB9YO5Cd9kiomy0HYbcGsn870uV4KNRniHNuYzXKiYcdiTi2OGse00hbszBZDZ
 
   //  async function getStripeApikey() {
   //   const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
@@ -78,8 +78,8 @@ function App() {
     <Router >
       <Header user = {user}  />
       
-      {stripeApiKey && (
-        <Elements stripe={loadStripe(pk_test_51M7fPNSBLINyeutfGMCg1908KqHwIfGPqZviHB9YO5Cd9kiomy0HYbcGsn870uV4KNRniHNuYzXKiYcdiTi2OGse00hbszBZDZ)}>
+      { (
+        <Elements stripe={loadStripe(stripeApiKey)}>
           <ProtectedRoute exact path="/process/payment" component={Payment} />
         </Elements>
       )}
