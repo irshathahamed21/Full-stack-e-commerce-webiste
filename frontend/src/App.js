@@ -40,7 +40,7 @@ import NotFound from './components/layout/notfound/NotFound';
 
 function App() {
     const { user, token} = useSelector((state) => state.user)
-    const stripeApiKey = `${process.env.STRIPE_API_KEY}`
+    const stripeApiKey = `${process.env.REACT_APP_STRIPE_API_KEY}`
 
   //  async function getStripeApikey() {
   //   const {data} = await axios.get("/irshath-e-commerce-store/stripeapikey")
