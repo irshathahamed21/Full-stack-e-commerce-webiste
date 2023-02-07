@@ -107,11 +107,7 @@ function App() {
       <ProtectedRoute exact path = "/admin/users" isAdmin = {true} component = {UserList}/>
       <ProtectedRoute exact path = "/admin/user/:id" isAdmin = {true} component = {UpdateUser}/>
       <ProtectedRoute exact path = "/admin/reviews" isAdmin = {true} component = {ProductReviews}/>
-      { (
-        <Elements stripe={loadStripe(stripeApiKey)}>
-          <ProtectedRoute exact path="/process/payment" component={Payment} />
-        </Elements>
-      )}
+      <ProtectedRoute exact path="/process/payment" component={Payment} />
       <Route
           component={
             window.location.pathname === "/process/payment" ? null : NotFound
