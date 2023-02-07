@@ -1,4 +1,11 @@
 .orderSuccess {
-    display:flex;
-    
+    width:100vw;
+    height:100vh;
+    display:grid;
+    place-items:center;
+}
+
+.orderSuccess > a {
+    color:black;
+    font-size: larger;
 }
