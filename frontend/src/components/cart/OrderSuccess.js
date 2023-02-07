@@ -13,10 +13,9 @@ const OrderSuccess = () => {
   <Metadata title = "Order Success" />
   
     <div className = "orderSuccess">
-    <CheckCircleIcon>
-        <Typography>Your Order has been successfully placed</Typography>
-        <Link to = "/orders">My Orders</Link>
-    </CheckCircleIcon>
+    <CheckCircleIcon/>
+    <Typography>Your Order has been successfully placed</Typography>
+    <Link to = "/orders">My Orders</Link>
     </div>
     </>
   )
