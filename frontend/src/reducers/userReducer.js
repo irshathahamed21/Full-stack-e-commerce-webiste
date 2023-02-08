@@ -59,7 +59,7 @@ import {
                     loading:false,
                     isAuthenticated:true,
                     user:action.payload.user,
-                    token:localStorage.getItem("token") ? localStorage.getItem("token") :action.payload.token
+                    token:action.payload.token
                 }
             case LOGOUT_SUCCESS:
                 return  {
