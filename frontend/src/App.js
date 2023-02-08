@@ -48,6 +48,7 @@ function App() {
   //   setStripeApiKey(data.stripeApiKey)
   //  }
   
+  
    axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`,
   };
@@ -65,11 +66,16 @@ function App() {
             families: ["Roboto", "Droid Sans", "Chilanka"],
           },
         })
-        store.dispatch(loadUser() )
+
+        if(localStorage.getItem("token")){
+          token = localStorage.getItem("token")
+          store.dispatch(loadUser() )
+        }
+       
         // getStripeApikey()
          
        
-    },[])
+    },[token])
 
  
   
