@@ -51,8 +51,9 @@ export const login = (email,password) => async (dispatch) => {
 
         const {data} = await axios.post("/irshath-e-commerce-store/login", {email,password}, config)
         console.log(data)
+
        
-        
+        localStorage.setItem("token", data.token)
         dispatch({type:LOGIN_SUCCESS, payload:data})
     }
     catch(error) {
@@ -68,6 +69,7 @@ export const register = (userData) => async (dispatch) => {
 
         const {data} = await axios.post("/irshath-e-commerce-store/register", userData, config)
         console.log(data)
+        localStorage.setItem("token", data.token)
 
         dispatch({type:REGISTER_USER_SUCCESS,payload:data})
     }
@@ -96,6 +98,8 @@ export const logout = () => async(dispatch) => {
     try {
 
         await axios.get("/irshath-e-commerce-store/logout")
+        localStorage.removeItem("token")
+
         dispatch({type:LOGOUT_SUCCESS})
     }
     catch(error){
@@ -132,6 +136,7 @@ export const updatePassword = (passwords) => async(dispatch)=> {
 
         const {data} = await axios.put("/irshath-e-commerce-store/update/password", passwords, config)
         console.log(data)
+        localStorage.setItem("token", data.token)
         dispatch({type:UPDATE_PASSWORD_SUCCESS,payload:data.success})
 
     }
