@@ -68,7 +68,10 @@ function App() {
         })
 
        
+        if(localStorage.getItem("token")){
           store.dispatch(loadUser() )
+        }
+         
         
        
         // getStripeApikey()
