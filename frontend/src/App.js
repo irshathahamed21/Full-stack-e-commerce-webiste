@@ -47,10 +47,10 @@ function App() {
 
   //   setStripeApiKey(data.stripeApiKey)
   //  }
-  
+ 
   
    axios.defaults.headers.common = {
-    'Authorization': `Bearer ${token}`,
+    'Authorization': `Bearer ${token ? token :localStorage.getItem("token")}`,
   };
     console.log(user)
     // const [stripeApiKey, setStripeApiKey] = useState("")
@@ -67,10 +67,9 @@ function App() {
           },
         })
 
-        if(localStorage.getItem("token")){
-          token = localStorage.getItem("token")
+       
           store.dispatch(loadUser() )
-        }
+        
        
         // getStripeApikey()
          
