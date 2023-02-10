@@ -84,7 +84,7 @@ export const loadUser = () => async(dispatch) => {
         dispatch({type:LOAD_USER_REQUEST})
         const config = {withCredentials:true}
         const {data} = await axios.get("/irshath-e-commerce-store/me", config)
-
+        console.log(data)
         dispatch({type:LOAD_USER_SUCCESS, payload:data})
 
     }
