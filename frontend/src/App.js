@@ -49,7 +49,7 @@ function App() {
   //  }
   
    axios.defaults.headers.common = {
-    'Authorization': `Bearer ${token ? token :localStorage.getItem("token")}`,
+    'Authorization': `Bearer ${token}`,
   };
   console.log(axios.defaults.headers.common.Authorization)
 
