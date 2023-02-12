@@ -36,6 +36,8 @@ import ProcessOrder from "./components/admin/ProcessOrder";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 import NotFound from './components/layout/notfound/NotFound';
+import About from "./components/layout/about/About";
+import { Contact } from "./components/layout/contact/Contact";
 
 
 function App() {
@@ -92,6 +94,9 @@ function App() {
         
       
       <Route exact path = "/" component = {Home} />
+      <Route exact path = "/About" component = {About} />
+      <Route exact path = "/Contact" component = {Contact} />
+
       <Route exact path = "/product/:id" component = {ProductDetails} />
       <Route exact path = "/products" component={Products}/>
       <Route path="/products/:keyword" component={Products} />
