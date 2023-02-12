@@ -113,7 +113,7 @@ export const updateProfile = (userData) => async(dispatch)=> {
     try {
         dispatch({type:UPDATE_PROFILE_REQUEST})
 
-        const config = {headers:{"Content-Type":"multipart/form-data"}, withCredentials:true}
+        const config = {headers:{"Content-Type":"multipart/form-data"}}
 
         const {data} = await axios.put("/irshath-e-commerce-store/me/update", userData, config)
 
@@ -132,7 +132,7 @@ export const updatePassword = (passwords) => async(dispatch)=> {
     try {
         dispatch({type:UPDATE_PASSWORD_REQUEST})
 
-        const config = { headers: { "Content-Type": "application/json" }, withCredentials:true};
+        const config = { headers: { "Content-Type": "application/json" }};
 
         const {data} = await axios.put("/irshath-e-commerce-store/update/password", passwords, config)
         console.log(data)
