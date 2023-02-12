@@ -29,6 +29,7 @@ const UpdatePassword = ({history}) => {
     myForm.set("oldPassword", oldPassword)
     myForm.set("newPassword", newPassword)
     myForm.set("confirmPassword", confirmPassword)
+    console.log(myForm)
     dispatch(updatePassword(myForm))
 
   }
