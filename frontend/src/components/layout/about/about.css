@@ -5,6 +5,9 @@
     display: grid;
     place-items: center;
     margin:auto;
-
   }
   
+.aboutSection > div {
+    display:flex;
+    flex-direction: column;
+}
