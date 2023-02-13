@@ -10,8 +10,6 @@ const About = () => {
   return (
     <div className="aboutSection">
         <Typography component="h1">About Us</Typography>
-
-       
           <div>
             <Typography>Irshath</Typography>
             <Button onClick={visitInstagram} color="primary">
