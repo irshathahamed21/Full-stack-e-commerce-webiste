@@ -4,6 +4,7 @@
     background-color: white;
     display: grid;
     grid-template-columns: 4fr 4fr;
+    position: fixed;
   
   }
   
@@ -16,6 +17,7 @@
   }
   
   .aboutSectionContainer {
+    position:obsolute;
     left: 50%;
     top: 50%;
     background-color: rgb(255, 255, 255);
