@@ -21,8 +21,7 @@ const About = () => {
               Visit Instagram
             </Button>
             <span>
-              This is a sample wesbite made by Irshath Ahamed. Only with the
-              purpose to teach MERN Stack on the channel 6 Pack Programmer
+              This is a sample wesbite made by Irshath Ahamed.
             </span>
           </div>
         </div>
