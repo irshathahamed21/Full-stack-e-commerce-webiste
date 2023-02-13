@@ -9,10 +9,9 @@ const About = () => {
   };
   return (
     <div className="aboutSection">
-      <div className="aboutSectionContainer">
         <Typography component="h1">About Us</Typography>
 
-        <div>
+       
           <div>
             <Typography>Irshath</Typography>
             <Button onClick={visitInstagram} color="primary">
