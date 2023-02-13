@@ -21,7 +21,7 @@ const About = () => {
               src="https://res.cloudinary.com/tripleayt/image/upload/v1631555947/products/jpyibarlaxawvcvqjv5b.png"
               alt="Founder"
             />
-            <Typography>Abhishek Singh</Typography>
+            <Typography>Irshath</Typography>
             <Button onClick={visitInstagram} color="primary">
               Visit Instagram
             </Button>
@@ -29,19 +29,6 @@ const About = () => {
               This is a sample wesbite made by Irshath Ahamed. Only with the
               purpose to teach MERN Stack on the channel 6 Pack Programmer
             </span>
-          </div>
-          <div className="aboutSectionContainer2">
-            <Typography component="h2">Our Brands</Typography>
-            <a
-              href="https://www.youtube.com/channel/UCO7afj9AUo0zV69pqEYhcjw"
-              target="blank"
-            >
-              <YouTubeIcon className="youtubeSvgIcon" />
-            </a>
-
-            <a href="https://instagram.com/meabhisingh" target="blank">
-              <InstagramIcon className="instagramSvgIcon" />
-            </a>
           </div>
         </div>
       </div>
