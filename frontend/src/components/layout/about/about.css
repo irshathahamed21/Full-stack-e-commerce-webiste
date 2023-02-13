@@ -4,10 +4,11 @@
     background-color: white;
     margin:auto;
     border:1px solid black;
+    text-align: center;
+
 
   }
 
-  
 .aboutSection > div {
     display:flex;
     flex-direction: column;
