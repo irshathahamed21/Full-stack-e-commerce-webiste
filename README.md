@@ -17,7 +17,7 @@
 <h3>Dshboard page (only admins can have access to this page)</h3>
 <img src = "https://github.com/irshathahamed21/Full-stack-e-commerce-webiste/blob/main/frontend/public/E-commerce-app/e-ccommerce-app-3.png?raw=true" />
 
-<h3>Tools and Technologies</h3>
+<h3>Tools and Technologies used</h3>
 <ul>
 <li>React</li>
 <li>HTML</li>
