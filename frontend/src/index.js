@@ -10,7 +10,6 @@ import axios from "axios"
    axios.defaults.baseURL = "https://e-commerce-backend-q5yg.onrender.com";
  
   
-
 const options = {
   // you can also just use 'bottom center'
   position: positions.BOTTOM_CENTER,
